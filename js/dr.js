@@ -1,4 +1,5 @@
 var updateLog = `
+2024/10/07 代码迁移; 
 2024/03/18 图片链接替换; 
 2022/11/06 推送优化; 
 2022/11/05 推送优化; 
@@ -24,11 +25,11 @@ var updateLog = `
 `.trim();
 var version={
     author:"道长",
-    ver:"5.2.18",
+    ver:"5.2.19",
     // appv:2316,
     appv:583,
     requireId:"http://hiker.nokia.press/hikerule/rulelist.json?id=2505",
-    update:'2024/03/18 16:30',
+    update:'2024/10/7 17:42',
     info:updateLog,
     ua:';get;utf-8;{User-Agent@Mozilla/5.0&&Cookie@}',
     ok:'https://okjx.cc/?url=',
