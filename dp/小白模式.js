@@ -30,7 +30,7 @@ d.push({
     col_type:'text_1',
     url:$('确认吗？').confirm(()=>{
         let localHtml = 'hiker://files/cache/plscParse.html';
-        writeFile(localHtml,request('https://gitcode.net/qq_32394351/dr/-/raw/master/dp/batch_delete.html'));
+        writeFile(localHtml,request('https://dr.playdreamer.cn/dp/batch_delete.html'));
         return 'toast://拉取完毕,可返回查看批量管理操作是否正常'
     })
 });

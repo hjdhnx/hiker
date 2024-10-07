@@ -120,7 +120,7 @@ if (importUrl) {
                 let import_rule= "轻合集订阅："+title+'\n'+url;
                 copy(import_rule);
                 const path = 'hiker://files/rules/dzHouse/ruleCache/sub.json';
-                require(getVar('sub依赖','https://gitcode.net/qq_32394351/dr/-/raw/master/js/subscribe.js'));
+                require(getVar('sub依赖','https://dr.playdreamer.cn/js/subscribe.js'));
                 return 订阅导入(path)
             },dataItem,subUrl),
             col_type: my_col_type

@@ -122,7 +122,7 @@ d.push({
 d.push({
     title: "选择文件路径",
     url:$('#noLoading#').lazyRule(()=>{
-        let fp = 'https://gitcode.net/qq_32394351/dr/-/raw/master/js/fileSelect.js';
+        let fp = 'https://dr.playdreamer.cn/js/fileSelect.js';
         let f = require(fp);
         return f.fileSelectionUri({
             callback: $.toString(() => {

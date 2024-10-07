@@ -1,1 +1,1 @@
-[地址](https://gitcode.net/qq_32394351/dr/-/raw/master/tvbox/py.json)
+[地址](https://dr.playdreamer.cn/tvbox/py.json)

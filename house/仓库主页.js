@@ -101,7 +101,7 @@ if(noWait){
             let d = [];
             let 仓库公告="暂无公告";
             try{
-                仓库公告=fetch('https://gitcode.net/qq_32394351/dr/-/raw/master/js/仓库公告.md');
+                仓库公告=fetch('https://dr.playdreamer.cn/js/仓库公告.md');
             }catch(e){}
             if(仓库公告) {
                 d.push({

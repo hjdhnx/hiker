@@ -3,7 +3,7 @@
     //https://hjdhnx.coding.net/public/hiker/hiker/git/files/master/js/dr.js
     //https://hjdhnx.coding.net/api/user/hjdhnx/project/hiker/shared-depot/dr/git/blob/master/js/dr.js
     $.extend({
-      _rootUrl: "https://gitcode.net/qq_32394351/dr/-/raw/master/libs/",
+      _rootUrl: "https://dr.playdreamer.cn/libs/",
       rc(url, is_blob) {
         if (/^hiker:\/\/|^file:\/\/|^\/storage\/|^\/sdcard\//.test(url)) {
           if (/^\/storage\/|^\/sdcard\//.test(url)) {

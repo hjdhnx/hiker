@@ -2,12 +2,12 @@ var version={
     author:"道长",
     ver:"2.1.1",
     appv:584,
-    requireId:"https://gitcode.net/qq_32394351/dr/-/raw/master/js/zyw.js",
+    requireId:"https://dr.playdreamer.cn/js/zyw.js",
     update:'2022/11/30 16:40',
     info:'新开模板，针对资源网采集站.3月20日连夜升级模板，支持xml/json格式的cms采集站。以及v1/v2/app/iptv格式的数据。抄自奇飞。更新插件库为xml2jsonJava\n支持通讯解密,预处理增加debug',
     ua:';get;utf-8;{User-Agent@Mozilla/5.0&&Cookie@}',
     ok:'https://okjx.cc/?url=',
-    jsRoot:'https://gitcode.net/qq_32394351/dr/-/raw/master/js/',
+    jsRoot:'https://dr.playdreamer.cn/js/',
 };
 putVar('zyw依赖',version.requireId);
 // http://www.jshaman.com/ 代码加密
@@ -163,7 +163,7 @@ function isIptv(link){//判断是否为Iptv
 function xml2json(xmlText){//将xml结果转为json的obj对象
     let lib_path = 'hiker://files/rules/dzHouse/html/xml2json.html';
     if(!fetch(lib_path)){
-        writeFile(lib_path, fetch('https://gitcode.net/qq_32394351/dr/-/raw/master/html/xml2json.html'));
+        writeFile(lib_path, fetch('https://dr.playdreamer.cn/html/xml2json.html'));
     }
     if(!xmlText){
         return {}

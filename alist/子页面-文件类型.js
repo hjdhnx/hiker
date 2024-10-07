@@ -9,7 +9,7 @@ const type_dict = {
 }
 
 function get_icon_dict() {
- let root = 'https://gitcode.net/qq_32394351/dr/-/raw/master/img/文件类型/';
+ let root = 'https://dr.playdreamer.cn/img/文件类型/';
  return {
   0: root + 'zip.svg',
   1: root + '文件夹.svg',
@@ -22,17 +22,17 @@ function get_icon_dict() {
 }
 let iconStyles = [{
  name:'默认',
- url:'https://gitcode.net/qq_32394351/dr/-/raw/master/img/文件类型/'
+ url:'https://dr.playdreamer.cn/img/文件类型/'
 },{
  name:'蓝莓',
- url:'https://gitcode.net/qq_32394351/dr/-/raw/master/img/文件类型2/'
+ url:'https://dr.playdreamer.cn/img/文件类型2/'
 }];
 let iconStyle = getItem('iconStyle','默认');
 let nowStyle = iconStyles.find(x=>x.name===iconStyle);
 let iconRoot = nowStyle?nowStyle.url:iconStyles[0].url;
 
 function get_icons() {
- // let root = 'https://gitcode.net/qq_32394351/dr/-/raw/master/img/文件类型/';
+ // let root = 'https://dr.playdreamer.cn/img/文件类型/';
  let root = iconRoot;
  let files = 'ai|apk|avi|css|dmg|exe|flv|gif|hiker|html|iso|jpg|js|json|log|mov|mp3|mp4|otf|php|png|ppt|psd|table|txt|wav|xls|zip|文件|文件夹'.split('|');
  let obj = {};

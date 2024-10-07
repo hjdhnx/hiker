@@ -175,7 +175,7 @@ let ui = ()=>{
 ###### 言尽于此，学得好的人早就写了几十个自己的dr/DR/Dr小程序了
 
 ###### 道长自封装的UI库
-[访问插件链接](https://gitcode.net/qq_32394351/dr/-/raw/master/js/hikerUi.js)  
+[访问插件链接](https://dr.playdreamer.cn/js/hikerUi.js)  
 二级选集动态翻页用法:  
 讲解:  
 下方的list是完整选集列表  
@@ -193,13 +193,13 @@ col_type:lsg.getItem('按钮样式','')||MY_RULE.col_type||'text_5',//二级选�
 用法1.
 ```js
 storage0.putMyVar('showList',list);//将要进行分页的数据设置缓存变量,也可以通过选集翻页函数第2个参数传递
-require('https://gitcode.net/qq_32394351/dr/-/raw/master/js/hikerUi.js');
+require('https://dr.playdreamer.cn/js/hikerUi.js');
 //选集翻页(d); // 翻页5大按钮在选集按钮上方
 选集翻页(d,null,true);//翻页5大按钮在选集按钮上下部分都有
 ```  
 用法2.
 ```js
-require('https://gitcode.net/qq_32394351/dr/-/raw/master/js/hikerUi.js');
+require('https://dr.playdreamer.cn/js/hikerUi.js');
 选集翻页(d,{
     list:list,
 }); // 翻页5大按钮在选集按钮上方

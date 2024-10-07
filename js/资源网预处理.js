@@ -1,6 +1,6 @@
 let obj = {
-    // 模板:'https://gitcode.net/qq_32394351/dr/-/raw/master/js/zyw.js',
-    模板:'https://gitcode.net/qq_32394351/dr/-/raw/master/js/zyw.js',
+    // 模板:'https://dr.playdreamer.cn/js/zyw.js',
+    模板:'https://dr.playdreamer.cn/js/zyw.js',
 };
 ua = (typeof (ua) !== 'undefined' && ua) ? ua :'';
 type = (typeof (type) !== 'undefined' && type) ? type :'';

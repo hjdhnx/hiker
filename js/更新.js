@@ -1,6 +1,6 @@
 var updateT = '2022/11/11 22:50';
 var 更新依赖 = function (){
-    let jsRoot = 'https://gitcode.net/qq_32394351/dr/-/raw/master/js/';
+    let jsRoot = 'https://dr.playdreamer.cn/js/';
     let jss = ['自动模板匹配.js','categories-header.js',
         'houseLazy.js','hikerUi.js','dr.js'].map(it=>jsRoot+it);
     let libs = [

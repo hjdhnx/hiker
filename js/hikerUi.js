@@ -3,12 +3,12 @@ var version={
     ver:"1.0.6",
     desc:'已停更',
     appv:2316,
-    requireId:"https://gitcode.net/qq_32394351/dr/-/raw/master/js/hikerUi.js",
+    requireId:"https://dr.playdreamer.cn/js/hikerUi.js",
     update:'2022/07/26 13:50',
     info:'新开模板，封装海阔UI',
     ua:';get;utf-8;{User-Agent@Mozilla/5.0&&Cookie@}',
     ok:'https://okjx.cc/?url=',
-    jsRoot:'https://gitcode.net/qq_32394351/dr/-/raw/master/js/',
+    jsRoot:'https://dr.playdreamer.cn/js/',
 };
 putVar('hikerUi',version.requireId);
 

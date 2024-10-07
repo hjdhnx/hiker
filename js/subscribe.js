@@ -2,11 +2,11 @@ var version = {
   author: "道长",
   ver: "1.2.8",
   appv: 4505,
-  requireId: "https://gitcode.net/qq_32394351/dr/-/raw/master/js/subscribe.js",
+  requireId: "https://dr.playdreamer.cn/js/subscribe.js",
   update: "2023/11/04 23:59",
   info: "2023/11/4修复了导入单规则失效的问题，道德经主体更新至轻合集最终版本。轻主页融合怪模板，主要给主页增加订阅功能.4月18日上线。由道长专群测试无问题后发布",
   ua: ";get;utf-8;{User-Agent@Mozilla/5.0&&Cookie@}",
-  jsRoot: "https://gitcode.net/qq_32394351/dr/-/raw/master/js/",
+  jsRoot: "https://dr.playdreamer.cn/js/",
 };
 
 putVar("sub依赖", version.requireId);
@@ -88,7 +88,7 @@ function 道长主页(is_small) {
         (it, cfg, nowData) => {
           require(getVar(
             "sub依赖",
-            "https://gitcode.net/qq_32394351/dr/-/raw/master/js/subscribe.js"
+            "https://dr.playdreamer.cn/js/subscribe.js"
           ));
           if (nowData === it.title) {
             切换订阅(it, cfg);
@@ -149,7 +149,7 @@ function 道长主页(is_small) {
         (tip1, path) => {
           require(getVar(
             "sub依赖",
-            "https://gitcode.net/qq_32394351/dr/-/raw/master/js/subscribe.js"
+            "https://dr.playdreamer.cn/js/subscribe.js"
           ));
           copy(
             "轻合集订阅：道长自用\nhttps://pasteme.tyrantg.com/xxxxxx/ijjocp44k9zjmp3g"
@@ -169,7 +169,7 @@ function 道长主页(is_small) {
         (tip2, path) => {
           require(getVar(
             "sub依赖",
-            "https://gitcode.net/qq_32394351/dr/-/raw/master/js/subscribe.js"
+            "https://dr.playdreamer.cn/js/subscribe.js"
           ));
           copy(
             "轻合集订阅：TyrantG合集\nhttps://pasteme.tyrantg.com/xxxxxx/qvotdahiw4jgnqoe"
@@ -189,7 +189,7 @@ function 道长主页(is_small) {
         (tip4, path) => {
           require(getVar(
             "sub依赖",
-            "https://gitcode.net/qq_32394351/dr/-/raw/master/js/subscribe.js"
+            "https://dr.playdreamer.cn/js/subscribe.js"
           ));
           copy(
             "轻合集订阅：本地\nhttps://pasteme.tyrantg.com/xxxxxx/6xvixjb0g1cpto7l"
@@ -209,7 +209,7 @@ function 道长主页(is_small) {
         (tip3, path) => {
           require(getVar(
             "sub依赖",
-            "https://gitcode.net/qq_32394351/dr/-/raw/master/js/subscribe.js"
+            "https://dr.playdreamer.cn/js/subscribe.js"
           ));
           copy(
             "轻合集订阅：聚影\nhttps://pasteme.tyrantg.com/xxxxxx/m2cxs5rwvocnvbcz"
@@ -230,7 +230,7 @@ function 道长主页(is_small) {
         (tip5, path) => {
           require(getVar(
             "sub依赖",
-            "https://gitcode.net/qq_32394351/dr/-/raw/master/js/subscribe.js"
+            "https://dr.playdreamer.cn/js/subscribe.js"
           ));
           copy(
             "轻合集订阅：聚漫\nhttps://pasteme.tyrantg.com/xxxxxx/tvwhevnceijto7w9"
@@ -250,7 +250,7 @@ function 道长主页(is_small) {
         (tip5, path) => {
           require(getVar(
             "sub依赖",
-            "https://gitcode.net/qq_32394351/dr/-/raw/master/js/subscribe.js"
+            "https://dr.playdreamer.cn/js/subscribe.js"
           ));
           copy(
             "轻合集订阅：听合集\nhttps://pasteme.tyrantg.com/xxxxxx/vbbxvpyrxp6tlgox"
@@ -270,7 +270,7 @@ function 道长主页(is_small) {
         (tip6, path) => {
           require(getVar(
             "sub依赖",
-            "https://gitcode.net/qq_32394351/dr/-/raw/master/js/subscribe.js"
+            "https://dr.playdreamer.cn/js/subscribe.js"
           ));
           copy(
             "轻合集订阅合集：道长自用等6条\nhttps://pasteme.tyrantg.com/xxxxxx/o6ogybnt2ccl5fog"
@@ -305,7 +305,7 @@ function 道长主页(is_small) {
           showLoading("升级检测中,请稍等...");
           require(getVar(
             "sub依赖",
-            "https://gitcode.net/qq_32394351/dr/-/raw/master/js/subscribe.js"
+            "https://dr.playdreamer.cn/js/subscribe.js"
           ));
           let requireId = version.requireId;
           let ver = version.ver;
@@ -360,7 +360,7 @@ function 道长主页(is_small) {
         } else if (/关于/.test(input)) {
           require(getVar(
             "sub依赖",
-            "https://gitcode.net/qq_32394351/dr/-/raw/master/js/subscribe.js"
+            "https://dr.playdreamer.cn/js/subscribe.js"
           ));
           return $("hiker://empty").rule((version) => {
             setPageTitle("关于道德经");
@@ -399,7 +399,7 @@ function 道长主页(is_small) {
           return $("#noLoading#").lazyRule((nowSub) => {
             require(getVar(
               "sub依赖",
-              "https://gitcode.net/qq_32394351/dr/-/raw/master/js/subscribe.js"
+              "https://dr.playdreamer.cn/js/subscribe.js"
             ));
             try {
               ret = 更新单个订阅(nowSub);
@@ -459,7 +459,7 @@ function 道长主页(is_small) {
                       writeFile(nowSub.desc, JSON.stringify(localRules));
                       require(getVar(
                         "sub依赖",
-                        "https://gitcode.net/qq_32394351/dr/-/raw/master/js/subscribe.js"
+                        "https://dr.playdreamer.cn/js/subscribe.js"
                       ));
                       切换订阅(nowSub, cfg);
                       refreshPage(false);
@@ -474,7 +474,7 @@ function 道长主页(is_small) {
                   writeFile(nowSub.desc, JSON.stringify(localRules));
                   require(getVar(
                     "sub依赖",
-                    "https://gitcode.net/qq_32394351/dr/-/raw/master/js/subscribe.js"
+                    "https://dr.playdreamer.cn/js/subscribe.js"
                   ));
                   切换订阅(nowSub, cfg);
                   refreshPage(false);
@@ -503,7 +503,7 @@ function 道长主页(is_small) {
             setPageTitle("订阅管理");
             require(getVar(
               "sub依赖",
-              "https://gitcode.net/qq_32394351/dr/-/raw/master/js/subscribe.js"
+              "https://dr.playdreamer.cn/js/subscribe.js"
             ));
             一级();
           });
@@ -518,7 +518,7 @@ function 道长主页(is_small) {
             setPageTitle("依赖管理");
             require(getVar(
               "sub依赖",
-              "https://gitcode.net/qq_32394351/dr/-/raw/master/js/subscribe.js"
+              "https://dr.playdreamer.cn/js/subscribe.js"
             ));
             一级依赖管理();
           });
@@ -2232,7 +2232,7 @@ function get_rule() {
     sdetail_find_rule: "*",
     ua: "mobile",
     preRule:
-      "var ua='$ua';\nrequire('https://gitcode.net/qq_32394351/dr/-/raw/master/js/资源网预处理.js');",
+      "var ua='$ua';\nrequire('https://dr.playdreamer.cn/js/资源网预处理.js');",
     pages: "[]",
     icon: "https://hikerfans.com/tubiao/ke/4.png",
   };
@@ -2375,7 +2375,7 @@ function 聚影(url, title) {
     sdetail_find_rule: "*",
     ua: "mobile",
     preRule:
-      "js:\nvar ua='$ua';\nvar type='$type';\nrequire('https://gitcode.net/qq_32394351/dr/-/raw/master/js/资源网预处理.js');",
+      "js:\nvar ua='$ua';\nvar type='$type';\nrequire('https://dr.playdreamer.cn/js/资源网预处理.js');",
     pages: "[]",
     icon: "",
     proxy: "",

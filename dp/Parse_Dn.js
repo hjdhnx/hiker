@@ -15,7 +15,7 @@ var _mySet = {
     oldConfig: 'hiker://files/cache/MyParseSet.json',
     ckLink: 'https://code.aliyun.com/AI957/Hiker/raw/master/v/',
     // cj: 'https://code.aliyun.com/AI957/Hiker/raw/master/v/CloudParse-V2_Dn.js',
-    cj: 'https://gitcode.net/qq_32394351/dr/-/raw/master/dp/Parse_Dn.js',
+    cj: 'https://dr.playdreamer.cn/dp/Parse_Dn.js',
     // x5Url: 'https://code.aliyun.com/AI957/Hiker/raw/master/v/Parse_Dn.html',
     x5Url: 'http://dr.nokia.press/html/Parse_Dn-vue.html',
     parseRoute: 'hiker://files/rules/DuanNian/MyParse.json',
@@ -214,7 +214,7 @@ if (getVar("jxOldV", "0") != version) {
     putVar('oldConfig', _mySet.oldConfig);
     putVar('parseRoute', _mySet.parseRoute);
     // let jxNewV = fetch('https://gitee.com/Duan-Nian/Dn/raw/master/hikerview/ParseVersion.txt');
-    let jxNewV = fetch('https://gitcode.net/qq_32394351/dr/-/raw/master/dp/ParseVersion.txt');
+    let jxNewV = fetch('https://dr.playdreamer.cn/dp/ParseVersion.txt');
     let jxOldV = (fetch(_mySet.cjcache).split('version = "')[1] + '').split('"')[0];
     tools.cprVersion(jxNewV, jxOldV);
 }

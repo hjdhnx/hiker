@@ -5,11 +5,11 @@
 由于gitcode开始做限制，大量直链提示请登录，无法正常访问，因此gitcode项目全部转移至github  
 项目中所有链接做了统一修改:
 ```text
-https://hjdhnx.coding.net/p/hiker/d/dr/git/raw/master/
+https://gitcode.net/qq_32394351/dr/-/raw/master/
 ```
 修改为
 ```text
-https://gitcode.net/qq_32394351/dr/-/raw/master/
+https://dr.playdreamer.cn/
 ```
 ###### 2022.07.28
 由于coding开始做限制，大量直链提示请登录，无法正常访问，因此coding项目全部转移至gitcode  

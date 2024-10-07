@@ -1,6 +1,6 @@
 js:
 // http://www.jshaman.com/ 代码加密
-putVar('cmsapp.jsRoot','https://gitcode.net/qq_32394351/dr/-/raw/master/js/');
+putVar('cmsapp.jsRoot','https://dr.playdreamer.cn/js/');
 var d=[];
 function demo(p){
     let d_url;

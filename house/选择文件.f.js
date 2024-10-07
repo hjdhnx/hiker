@@ -20,7 +20,7 @@
       }
   },
   loadIcon() {
-      let fileSelectRoot = "https://gitcode.net/qq_32394351/dr/-/raw/master/";
+      let fileSelectRoot = "https://dr.playdreamer.cn/";
       let iconHttp = Object.entries({
           js: fileSelectRoot + "img/文件类型/js.svg",
           log: fileSelectRoot + "img/文件类型/log.svg",
@@ -63,7 +63,7 @@
           onClickType: "lazyRule",
           cHomeTips: "确认选择[${name}]",
           cSearchTips: "确认选择[${path}]",
-          requireUrl: "https://gitcode.net/qq_32394351/dr/-/raw/master/js/fileSelect.js",
+          requireUrl: "https://dr.playdreamer.cn/js/fileSelect.js",
           memory: "",
           initialPath: getPath("hiker://files/").slice(7),
           rootDirPath: getPath("hiker://files/").slice(7)

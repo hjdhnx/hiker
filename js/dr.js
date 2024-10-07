@@ -32,7 +32,7 @@ var version={
     info:updateLog,
     ua:';get;utf-8;{User-Agent@Mozilla/5.0&&Cookie@}',
     ok:'https://okjx.cc/?url=',
-    jsRoot:'https://gitcode.net/qq_32394351/dr/-/raw/master/js/',
+    jsRoot:'https://dr.playdreamer.cn/js/',
 };
 putVar('dr依赖',version.requireId);
 /*
@@ -188,7 +188,7 @@ function getAliToken() {//获取阿里云的refreshtoken,网页版登录后控�
 }
 
 function 预处理固定代码(){//使用: require(version.jsRoot+'预处理.js')
-    var dr_jsRoot = 'https://gitcode.net/qq_32394351/dr/-/raw/master/js/';
+    var dr_jsRoot = 'https://dr.playdreamer.cn/js/';
     try {
         const {getApi} = $.require("hiker://page/utiliy?rule=道长仓库Pro");
         var 模板 = getApi('importUrl')+"2505";
@@ -1632,7 +1632,7 @@ function 小说(定位,指定编码){
         function 小说净化(content){
             let path = 'hiker://files/rules/dzHouse/json/小说净化.json';
             if(!fileExist(path)){
-                requireDownload('https://gitcode.net/qq_32394351/dr/-/raw/master/libs/小说净化.json', path);
+                requireDownload('https://dr.playdreamer.cn/libs/小说净化.json', path);
             }
             content = pdfh(content,'body&&Text');
             let javaString = java.lang.String(content);

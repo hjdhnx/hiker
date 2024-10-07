@@ -87,7 +87,7 @@ d.push({
               "https://hjdhnx.coding.net/p/hiker/d/dr/git/raw/master/js/",
               "g"
             ),
-            "https://gitcode.net/qq_32394351/dr/-/raw/master/js/"
+            "https://dr.playdreamer.cn/js/"
           );
           new_rules.push(it);
           clearRequire(it.title, that);

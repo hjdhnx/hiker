@@ -6,12 +6,12 @@ var version={
     author:"道长",
     ver:"1.2.5",
     appv:2316,
-    requireId:"https://gitcode.net/qq_32394351/dr/-/raw/master/js/ruleEditor.js",
+    requireId:"https://dr.playdreamer.cn/js/ruleEditor.js",
     update:'2024/04/21 00:41',
     info:updateLog,
     ua:';get;utf-8;{User-Agent@Mozilla/5.0&&Cookie@}',
     ok:'https://okjx.cc/?url=',
-    jsRoot:'https://gitcode.net/qq_32394351/dr/-/raw/master/js/',
+    jsRoot:'https://dr.playdreamer.cn/js/',
 };
 putVar('editor依赖',version.requireId);
 putVar('editor.jsRoot',version.jsRoot);

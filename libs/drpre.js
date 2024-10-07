@@ -1,4 +1,4 @@
-var dr_jsRoot = 'https://gitcode.net/qq_32394351/dr/-/raw/master/js/';
+var dr_jsRoot = 'https://dr.playdreamer.cn/js/';
 try {
     const {getApi} = $.require("hiker://page/utiliy?rule=道长仓库Pro");
     var 模板 = getApi('importUrl')+"2505";

@@ -7,12 +7,12 @@ var version={
     author:"道长",
     ver:"1.0.2",
     appv:2400,
-    requireId:"https://gitcode.net/qq_32394351/dr/-/raw/master/libs/hikerLibs.js",
+    requireId:"https://dr.playdreamer.cn/libs/hikerLibs.js",
     update:'2022/08/24 11:16',
     info:updateLog,
     ua:';get;utf-8;{User-Agent@Mozilla/5.0&&Cookie@}',
     ok:'https://okjx.cc/?url=',
-    jsRoot:'https://gitcode.net/qq_32394351/dr/-/raw/master/libs/',
+    jsRoot:'https://dr.playdreamer.cn/libs/',
 };
 function objectI18n(obj,i18n){//对象翻译
     let new_obj = {};
