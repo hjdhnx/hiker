@@ -1,0 +1,148 @@
+<templateSet group="odoo">
+  <template name="otree" value="&lt;record model=&quot;ir.ui.view&quot; id=&quot;$model_name$_tree&quot;&gt;&#10;              &lt;field name=&quot;name&quot;&gt;$model_name$_tree&lt;/field&gt;&#10;              &lt;field name=&quot;model&quot;&gt;$model$&lt;/field&gt;&#10;              &lt;field name=&quot;arch&quot; type=&quot;xml&quot;&gt;&#10;                &lt;tree limit='1000'&gt;&#10;                    &lt;field name=&quot;name&quot; string=&quot;名称&quot;/&gt;&#10;                    &lt;field name=&quot;type_id&quot; string=&quot;类型&quot; widget=&quot;many2one&quot;/&gt;&#10;                    &lt;field name=&quot;author&quot; string=&quot;作者&quot;/&gt;&#10;                    &lt;field name=&quot;home_url&quot; string=&quot;主页链接&quot;/&gt;&#10;                    &lt;field name=&quot;active&quot; string=&quot;启用&quot; widget=&quot;toggle_button&quot;/&gt;&#10;                &lt;/tree&gt;&#10;              &lt;/field&gt;&#10;&lt;/record&gt;" description="odoo列表" toReformat="true" toShortenFQNames="true">
+    <variable name="model_name" expression="fileNameWithoutExtension()" defaultValue="" alwaysStopAt="true" />
+    <variable name="model" expression="fileNameWithoutExtension()" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="XML_TEXT" value="true" />
+    </context>
+  </template>
+  <template name="oform" value="&lt;record model=&quot;ir.ui.view&quot; id=&quot;$model_name$_form&quot;&gt;&#10;              &lt;field name=&quot;name&quot;&gt;$model_name$_form&lt;/field&gt;&#10;              &lt;field name=&quot;model&quot;&gt;$model$&lt;/field&gt;&#10;                &lt;field name=&quot;priority&quot;&gt;10&lt;/field&gt;&#10;              &lt;field name=&quot;arch&quot; type=&quot;xml&quot;&gt;&#10;                &lt;form create=&quot;1&quot; edit=&quot;1&quot; delete=&quot;1&quot;&gt;&#10;                  &lt;sheet&gt;&#10;                      &lt;field name=&quot;pic_url_img&quot; class=&quot;oe_avatar&quot;/&gt;&#10;                        &lt;div class=&quot;oe_title&quot;&gt;&#10;                            &lt;label for=&quot;name&quot; class=&quot;oe_edit_only&quot; string=&quot;名称&quot;/&gt;&#10;                            &lt;h1&gt;&lt;field name=&quot;name&quot; required=&quot;1&quot; placeholder=&quot;名称&quot;/&gt;&lt;/h1&gt;&#10;                        &lt;/div&gt;&#10;                      &lt;group col=&quot;3&quot; &gt;&#10;                          &lt;group colspan=&quot;1&quot;&gt;&#10;                              &lt;field name=&quot;type_id&quot; string=&quot;规则分类&quot;/&gt;&#10;                          &lt;/group&gt;&#10;                          &lt;group colspan=&quot;1&quot;&gt;&#10;                              &lt;field name=&quot;dev_id&quot; string=&quot;开发者&quot;/&gt;&#10;                              &lt;field name=&quot;auth&quot; attrs=&quot;{'invisible':[('state','!=','private')]}&quot;/&gt;&#10;                          &lt;/group&gt;&#10;                      &lt;/group&gt;&#10;                      &lt;group&gt;&#10;                          &lt;group&gt;&#10;                                &lt;field name=&quot;home_url&quot; string=&quot;主页链接&quot;/&gt;&#10;                                &lt;field name=&quot;pic_url&quot; string=&quot;图片链接&quot;/&gt;&#10;                          &lt;/group&gt;&#10;&#10;                          &lt;group&gt;&#10;                              &lt;field name=&quot;is_json_list&quot; string=&quot;是否合集&quot; attrs=&quot;{'invisible':[('is_json','=',False)]}&quot;/&gt;&#10;                              &lt;field name=&quot;author&quot; string=&quot;作者&quot;/&gt;&#10;                          &lt;/group&gt;&#10;                      &lt;/group&gt;&#10;                  &lt;/sheet&gt;&#10;                &lt;/form&gt;&#10;              &lt;/field&gt;&#10;        &lt;/record&gt;" description="odoo表单" toReformat="true" toShortenFQNames="true">
+    <variable name="model_name" expression="fileNameWithoutExtension()" defaultValue="" alwaysStopAt="true" />
+    <variable name="model" expression="fileNameWithoutExtension()" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="XML_TEXT" value="true" />
+    </context>
+  </template>
+  <template name="oheader" value="&lt;header&gt;&#10;    &lt;button name=&quot;share&quot; string=&quot;分享此规则&quot; type=&quot;object&quot; class=&quot;oe_highlight&quot;/&gt;&#10;    &lt;field name=&quot;state&quot; widget=&quot;statusbar&quot;/&gt;&#10;&lt;/header&gt;" description="odoo表头,放在form下面sheet上面" toReformat="true" toShortenFQNames="true">
+    <context>
+      <option name="XML_TEXT" value="true" />
+    </context>
+  </template>
+  <template name="ofooter" value="&lt;footer&gt;&#10;    &lt;button string='拒绝' name=&quot;expense_payment_refuse_reason&quot; type=&quot;object&quot; class=&quot;oe_highlight&quot;/&gt;&#10;    &lt;button string=&quot;取消&quot; class=&quot;oe_link&quot; special=&quot;cancel&quot;/&gt;&#10;&lt;/footer&gt;" description="odoo页脚,放在&lt;/sheet&gt;下面,&lt;/form&gt;上面" toReformat="true" toShortenFQNames="true">
+    <context>
+      <option name="XML_TEXT" value="true" />
+    </context>
+  </template>
+  <template name="omail" value="&lt;div class=&quot;oe_chatter&quot;&gt;&#10;    &lt;field name=&quot;message_follower_ids&quot; widget=&quot;mail_followers&quot;/&gt;&#10;    &lt;field name=&quot;activity_ids&quot; widget=&quot;mail_activity&quot;/&gt;&#10;    &lt;field name=&quot;message_ids&quot; widget=&quot;mail_thread&quot;/&gt;&#10;&lt;/div&gt;" description="odoo信息,放在&lt;/sheet&gt;外面&lt;/form&gt;上面" toReformat="true" toShortenFQNames="true">
+    <context>
+      <option name="XML_TEXT" value="true" />
+    </context>
+  </template>
+  <template name="onotebook" value="&lt;notebook&gt;&#10;&lt;page string=&quot;系统信息&quot; groups=&quot;base.group_no_one&quot;&gt;&#10;  &lt;group&gt;&#10;      &lt;group&gt;&#10;            &lt;field name=&quot;create_date&quot; readonly=&quot;1&quot; string=&quot;创建人&quot;/&gt;&#10;            &lt;field name=&quot;create_uid&quot; readonly=&quot;1&quot; string=&quot;创建日期&quot;/&gt;&#10;      &lt;/group&gt;&#10;&#10;      &lt;group&gt;&#10;            &lt;field name=&quot;write_date&quot; readonly=&quot;1&quot; string=&quot;修改人&quot;/&gt;&#10;            &lt;field name=&quot;write_uid&quot; readonly=&quot;1&quot; string=&quot;修改日期&quot;/&gt;&#10;      &lt;/group&gt;&#10;&#10;  &lt;/group&gt;&#10;&lt;/page&gt;&#10;&lt;/notebook&gt;" description="odoo页签,放在sheet内部" toReformat="true" toShortenFQNames="true">
+    <context>
+      <option name="XML_TEXT" value="true" />
+    </context>
+  </template>
+  <template name="obtnbox" value="&lt;div class=&quot;oe_button_box&quot; name=&quot;button_box&quot;&gt;&#10;        &lt;button name=&quot;toggle_active&quot; type=&quot;object&quot; class=&quot;oe_stat_button&quot; icon=&quot;fa-archive&quot;&gt;&#10;            &lt;field name=&quot;active&quot; widget=&quot;boolean_button&quot;/&gt;&#10;        &lt;/button&gt;&#10;&lt;/div&gt;" description="odoo按钮盒,放在&lt;sheet&gt;内部开头" toReformat="true" toShortenFQNames="true">
+    <context>
+      <option name="XML_TEXT" value="true" />
+    </context>
+  </template>
+  <template name="okanban" value="&lt;record id=&quot;$model_name$_kanban&quot; model=&quot;ir.ui.view&quot;&gt;&#10;        &lt;field name=&quot;name&quot;&gt;$model_name$_kanban&lt;/field&gt;&#10;        &lt;field name=&quot;model&quot;&gt;$model$&lt;/field&gt;&#10;        &lt;field name=&quot;priority&quot;&gt;10&lt;/field&gt;&#10;        &lt;field name=&quot;arch&quot; type=&quot;xml&quot;&gt;&#10;            &lt;kanban class=&quot;o_kanban_mobile&quot;&gt;&#10;                &lt;templates&gt;&#10;                    &lt;t t-name=&quot;kanban-box&quot;&gt;&#10;                        &lt;div t-attf-class=&quot;oe_kanban_content oe_kanban_global_click&quot;&gt;&#10;&#10;                         &lt;div class=&quot;row mb4&quot;&gt;&#10;                            &lt;div class=&quot;col-6&quot;&gt;&#10;                                &lt;strong&gt;&lt;span&gt;&lt;field name=&quot;name&quot;/&gt;&lt;/span&gt;&lt;/strong&gt;&#10;                            &lt;/div&gt;&#10;                        &lt;/div&gt;&#10;&#10;                            &lt;div class=&quot;col-12 text-right&quot;&gt;&#10;                                        &lt;field name=&quot;active&quot; widget=&quot;toggle_button&quot;/&gt;&#10;                            &lt;/div&gt;&#10;                            &lt;div class=&quot;oe_module_action&quot; t-if=&quot;!selection_mode&quot;&gt;&#10;                                &lt;button class=&quot;btn-primary&quot; name=&quot;apply_this_app&quot; string=&quot;仅用此机器人&quot; type=&quot;object&quot;&gt;仅用此机器人&lt;/button&gt;&#10;                            &lt;/div&gt;&#10;                        &lt;/div&gt;&#10;                    &lt;/t&gt;&#10;                &lt;/templates&gt;&#10;            &lt;/kanban&gt;&#10;        &lt;/field&gt;&#10;&lt;/record&gt;" description="odoo看板" toReformat="true" toShortenFQNames="true">
+    <variable name="model_name" expression="fileNameWithoutExtension()" defaultValue="" alwaysStopAt="true" />
+    <variable name="model" expression="fileNameWithoutExtension()" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="XML_TEXT" value="true" />
+    </context>
+  </template>
+  <template name="osearch" value="&lt;record model=&quot;ir.ui.view&quot; id=&quot;$model_name$_search&quot;&gt;&#10;                &lt;field name=&quot;name&quot;&gt;$model_name$_search&lt;/field&gt;&#10;                &lt;field name=&quot;model&quot;&gt;$model$&lt;/field&gt;&#10;                &lt;field name=&quot;arch&quot; type=&quot;xml&quot;&gt;&#10;                  &lt;search string=&quot;搜索&quot;&gt;&#10;                      &lt;!--自定义可搜索字段，比如价格--&gt;&#10;                    &lt;field name=&quot;name&quot; string=&quot;名称&quot;/&gt;&#10;                    &lt;separator/&gt;&#10;                    &lt;filter string=&quot;全部&quot; name=&quot;all&quot; domain=&quot;['|',('active','=',True),('active','=',False)]&quot;/&gt;&#10;                    &lt;filter string=&quot;已启用&quot; name=&quot;active&quot; domain=&quot;[('active','=',True)]&quot;/&gt;&#10;                    &lt;filter string=&quot;已归档&quot; name=&quot;drop&quot; domain=&quot;[('active','=',False)]&quot;/&gt;&#10;                    &lt;separator/&gt;&#10;                    &lt;group expand=&quot;0&quot; string=&quot;分组&quot;&gt;&#10;                        &lt;filter string=&quot;状态&quot; name=&quot;state&quot; context=&quot;{'group_by':'state'}&quot;/&gt;&#10;                    &lt;/group&gt;&#10;                  &lt;/search&gt;&#10;&#10;               &lt;/field&gt;&#10;&lt;/record&gt;" description="odoo搜索" toReformat="true" toShortenFQNames="true">
+    <variable name="model_name" expression="fileNameWithoutExtension()" defaultValue="" alwaysStopAt="true" />
+    <variable name="model" expression="fileNameWithoutExtension()" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="XML_TEXT" value="true" />
+    </context>
+  </template>
+  <template name="otreeInherit" value="&lt;record model = &quot;ir.ui.view&quot; id = &quot;$model_name$_tree_extent&quot;&gt;&#10;            &lt;field name=&quot;name&quot;&gt;$model_name$_tree_extent&lt;/field&gt;&#10;            &lt;field name=&quot;model&quot;&gt;$model$&lt;/field&gt;&#10;            &lt;field name=&quot;inherit_id&quot; ref=&quot;$module$.$tree_view$&quot;/&gt;&#10;            &lt;field name=&quot;arch&quot; type=&quot;xml&quot;&gt;&#10;            &lt;data&gt;&#10;                &lt;xpath expr = &quot;//field[@name='name']&quot; position = &quot;after&quot;&gt;&#10;                    &lt;field name=&quot;note&quot; string=&quot;备注&quot;/&gt;&#10;                &lt;/xpath&gt;&#10;                &#10;                &lt;xpath expr = &quot;//field[@name='name']&quot; position = &quot;before&quot;&gt;&#10;                    &lt;field name=&quot;note&quot; string=&quot;备注&quot;/&gt;&#10;                &lt;/xpath&gt;&#10;                &#10;                &lt;xpath expr = &quot;//field[@name='name']&quot; position = &quot;attributes&quot;&gt;&#10;                    &lt;attribute name=&quot;invisible&quot;&gt;1&lt;/attribute&gt;&#10;                    &lt;attribute name=&quot;string&quot;&gt;名称&lt;/attribute&gt;&#10;                &lt;/xpath&gt;&#10;                &#10;            &lt;/data&gt;&#10;            &lt;/field&gt;&#10;&lt;/record&gt;" description="odoo列表继承" toReformat="true" toShortenFQNames="true">
+    <variable name="model_name" expression="fileNameWithoutExtension()" defaultValue="" alwaysStopAt="true" />
+    <variable name="model" expression="fileNameWithoutExtension()" defaultValue="" alwaysStopAt="true" />
+    <variable name="module" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="tree_view" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="XML_TEXT" value="true" />
+    </context>
+  </template>
+  <template name="oformInherit" value="&lt;record model = &quot;ir.ui.view&quot; id = &quot;$model_name$_form_extent&quot;&gt;&#10;            &lt;field name=&quot;name&quot;&gt;$model_name$_form_extent&lt;/field&gt;&#10;            &lt;field name=&quot;model&quot;&gt;$model$&lt;/field&gt;&#10;            &lt;field name=&quot;inherit_id&quot; ref=&quot;$module$.$form_view$&quot;/&gt;&#10;            &lt;field name=&quot;arch&quot; type=&quot;xml&quot;&gt;&#10;            &lt;data&gt;&#10;                &lt;xpath expr = &quot;//field[@name='name']&quot; position = &quot;after&quot;&gt;&#10;                    &lt;field name=&quot;note&quot; string=&quot;备注&quot;/&gt;&#10;                &lt;/xpath&gt;&#10;                &#10;                &lt;xpath expr = &quot;//field[@name='name']&quot; position = &quot;before&quot;&gt;&#10;                    &lt;field name=&quot;note&quot; string=&quot;备注&quot;/&gt;&#10;                &lt;/xpath&gt;&#10;                &#10;                &lt;xpath expr = &quot;//field[@name='name']&quot; position = &quot;attributes&quot;&gt;&#10;                    &lt;attribute name=&quot;invisible&quot;&gt;1&lt;/attribute&gt;&#10;                    &lt;attribute name=&quot;string&quot;&gt;名称&lt;/attribute&gt;&#10;                &lt;/xpath&gt;&#10;                &#10;            &lt;/data&gt;&#10;            &lt;/field&gt;&#10;&lt;/record&gt;" description="odoo表单继承" toReformat="true" toShortenFQNames="true">
+    <variable name="model_name" expression="fileNameWithoutExtension()" defaultValue="" alwaysStopAt="true" />
+    <variable name="model" expression="fileNameWithoutExtension()" defaultValue="" alwaysStopAt="true" />
+    <variable name="module" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="form_view" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="XML_TEXT" value="true" />
+    </context>
+  </template>
+  <template name="osearchInherit" value="&lt;record model = &quot;ir.ui.view&quot; id = &quot;$model_name$_search_ext&quot;&gt;&#10;            &lt;field name=&quot;name&quot;&gt;$model_name$_search_ext&lt;/field&gt;&#10;            &lt;field name=&quot;model&quot;&gt;$model$&lt;/field&gt;&#10;            &lt;field name=&quot;inherit_id&quot; ref=&quot;$module$.$search_view$&quot;/&gt;&#10;           &lt;field name=&quot;priority&quot; eval=&quot;10&quot;/&gt;&#10;            &lt;field name=&quot;arch&quot; type=&quot;xml&quot;&gt;&#10;&#10;                &lt;xpath expr = &quot;//group/filter[@name='state']&quot; position = &quot;after&quot;&gt;&#10;                    &lt;filter string=&quot;组&quot; name=&quot;group_id&quot; context=&quot;{'group_by':'group_id'}&quot; domain=&quot;[]&quot;/&gt;&#10;                &lt;/xpath&gt;&#10;            &lt;/field&gt;&#10;&lt;/record&gt;" description="odoo搜索继承" toReformat="true" toShortenFQNames="true">
+    <variable name="model_name" expression="fileNameWithoutExtension()" defaultValue="" alwaysStopAt="true" />
+    <variable name="model" expression="fileNameWithoutExtension()" defaultValue="" alwaysStopAt="true" />
+    <variable name="module" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="search_view" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="XML_TEXT" value="true" />
+    </context>
+  </template>
+  <template name="oactionWin" value=" &lt;record id=&quot;action_open_$model_name$&quot; model=&quot;ir.actions.act_window&quot;&gt;&#10;            &lt;field name=&quot;name&quot;&gt;$model_name$列表&lt;/field&gt;&#10;            &lt;field name=&quot;res_model&quot;&gt;$model$&lt;/field&gt;&#10;            &lt;field name=&quot;view_mode&quot;&gt;tree,form&lt;/field&gt;&#10;            &lt;field name=&quot;view_id&quot; ref=&quot;$module$.$tree_view$&quot;/&gt;&#10;&lt;!--            &lt;field name=&quot;target&quot;&gt;new,current,main,fullscreen&lt;/field&gt;--&gt;&#10;            &lt;field name=&quot;context&quot;&gt;{'search_default_all':True,'form_view_ref': '$module$.form_view', 'tree_view_ref': '$module$.tree_view'}&lt;/field&gt;&#10;            &lt;field name=&quot;domain&quot;&gt;[('create_uid','=',uid)]&lt;/field&gt;&#10;&lt;/record&gt;" description="odoo窗口动作" toReformat="true" toShortenFQNames="true">
+    <variable name="model_name" expression="fileNameWithoutExtension()" defaultValue="" alwaysStopAt="true" />
+    <variable name="model" expression="fileNameWithoutExtension()" defaultValue="" alwaysStopAt="true" />
+    <variable name="module" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="tree_view" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="XML_TEXT" value="true" />
+    </context>
+  </template>
+  <template name="oactionSev" value="&lt;record id=&quot;action_$action_name$&quot; model=&quot;ir.actions.server&quot;&gt;&#10;                    &lt;field name=&quot;name&quot;&gt;$action_name$&lt;/field&gt;&#10;                    &lt;field name=&quot;model_id&quot; ref=&quot;model_$model_name$&quot;/&gt;&#10;                    &lt;field name=&quot;binding_model_id&quot; ref=&quot;model_$model_name$&quot;/&gt;  &lt;!--将该动作添加到该模型视图的选项中--&gt;&#10;                    &lt;field name=&quot;state&quot;&gt;code&lt;/field&gt;&#10;                    &lt;field name=&quot;code&quot;&gt;&#10;                    action = records.action_$action_name$()&#10;                    &lt;/field&gt;&#10;&lt;/record&gt;" description="odoo服务器动作" toReformat="true" toShortenFQNames="true">
+    <variable name="action_name" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="model_name" expression="fileNameWithoutExtension()" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="XML_TEXT" value="true" />
+    </context>
+  </template>
+  <template name="omenu" value="&lt;menuitem name=&quot;子菜单名称&quot; id=&quot;menu_$menu_id$&quot; parent=&quot;$module$.$parent_menu_id$&quot;&#10;                  action=&quot;$module$.$act_win$&quot; sequence=&quot;1&quot;/&gt;" description="odoo子菜单" toReformat="true" toShortenFQNames="true">
+    <variable name="menu_id" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="module" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="parent_menu_id" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="act_win" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="XML_TEXT" value="true" />
+    </context>
+  </template>
+  <template name="omenu_root" value="&lt;menuitem name=&quot;根菜单名称&quot; groups=&quot;base.group_system&quot; &#10;          id=&quot;nemu_$model_name$_root&quot;&#10;          web_icon=&quot;$module$,static/description/icon.png&quot;  &#10;          action=&quot;$module$.$act_win$&quot; sequence=&quot;1&quot;/&gt;" description="odoo顶级菜单" toReformat="true" toShortenFQNames="true">
+    <variable name="model_name" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="module" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="act_win" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="XML_TEXT" value="true" />
+    </context>
+  </template>
+  <template name="oactionUrl" value="&lt;record model=&quot;ir.actions.act_url&quot; id=&quot;actUrl_open_baidu&quot;&gt;&#10;      &lt;field name=&quot;name&quot;&gt;打开百度&lt;/field&gt;&#10;      &lt;field name=&quot;target&quot;&gt;new,self&lt;/field&gt;&#10;      &lt;field name=&quot;url&quot;&gt;https://www.baidu.com&lt;/field&gt;&#10;&lt;/record&gt;" description="odoo打开链接动作" toReformat="true" toShortenFQNames="true">
+    <context>
+      <option name="XML_TEXT" value="true" />
+    </context>
+  </template>
+  <template name="opivot" value="&lt;record id=&quot;$model_name$_pivot&quot; model=&quot;ir.ui.view&quot;&gt;&#10;        &lt;field name=&quot;name&quot;&gt;$model_name$_pivot&lt;/field&gt;&#10;        &lt;field name=&quot;model&quot;&gt;$model$&lt;/field&gt;&#10;        &lt;field name=&quot;priority&quot;&gt;10&lt;/field&gt;&#10;        &lt;field name=&quot;arch&quot; type=&quot;xml&quot;&gt;&#10;            &lt;pivot string=&quot;$model_name$_pivot&quot; &gt;&#10;                    &lt;field name=&quot;internal_group&quot; type=&quot;row&quot;/&gt;&#10;                    &lt;field name=&quot;account_id&quot; type=&quot;row&quot;/&gt;&#10;                    &lt;field name=&quot;fr_period_id&quot; type=&quot;col&quot; string=&quot;会计期间&quot;/&gt;&#10;                    &lt;field name=&quot;debit_start&quot; type=&quot;measure&quot;/&gt;&#10;                    &lt;field name=&quot;credit_start&quot; type=&quot;measure&quot;/&gt;&#10;                    &lt;field name=&quot;beginning_start&quot; type=&quot;measure&quot;/&gt;&#10;            &lt;/pivot&gt;&#10;        &lt;/field&gt;&#10;&lt;/record&gt;" description="odoo透视图" toReformat="false" toShortenFQNames="true">
+    <variable name="model_name" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="model" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="XML_TEXT" value="true" />
+    </context>
+  </template>
+  <template name="ohelp" value="&lt;field name=&quot;help&quot; type=&quot;html&quot;&gt;&#10;        &lt;p class=&quot;o_view_nocontent_smiling_face&quot;&gt;&#10;            暂无。&#10;        &lt;/p&gt;&#10;&lt;/field&gt;" description="动作帮助" toReformat="true" toShortenFQNames="true">
+    <context>
+      <option name="XML_TEXT" value="true" />
+    </context>
+  </template>
+  <template name="oalert" value="&lt;div class=&quot;alert alert-success&quot; role=&quot;alert&quot;&gt;&#10;                                      规则分享方法如下所示(特殊文本前缀加json或者json集合的地址):&lt;br&gt;&lt;/br&gt;&#10;                                    海阔视界首页频道单个规则【&lt;field name=&quot;name&quot; nolabel=&quot;1&quot; class=&quot;oe_inline&quot;/&gt;】￥home_rule_url￥&lt;field name=&quot;url&quot; readonly='1' nolabel=&quot;1&quot;/&gt;/hikerule/rulelist.json?id=&lt;field name=&quot;id&quot; nolabel=&quot;1&quot;/&gt;&lt;br&gt;&lt;/br&gt;&#10;                                  &lt;pre&gt;&lt;code class=&quot;hljs&quot;&gt;海阔视界规则分享，当前分享的是：首页频道￥home_rule_v2￥base64://@&lt;field name=&quot;name&quot; nolabel=&quot;1&quot; class=&quot;oe_inline&quot;/&gt;@&lt;field name=&quot;b64_value&quot; nolabel=&quot;1&quot;/&gt;&lt;/code&gt;&lt;/pre&gt;&#10;                                    海阔视界首页频道合集，精选千源，【道长】分类整理￥home_rule_url￥&lt;field name=&quot;url&quot; readonly='1' nolabel=&quot;1&quot;/&gt;/hikerule/rulelist.json&#10;&lt;/div&gt;" description="界面提示信息" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="XML_TEXT" value="true" />
+    </context>
+  </template>
+  <template name="obutton" value="&lt;button name=&quot;open_discuss_ids&quot; attrs=&quot;{'invisible': [('discuss_ids','=', False)]}&quot;&#10;                            class=&quot;oe_stat_button&quot; icon=&quot;fa-bars&quot; type=&quot;object&quot; string=&quot;规则交流&quot;/&gt;" description="状态按钮" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="XML_TEXT" value="true" />
+    </context>
+  </template>
+  <template name="okanban2" value="&lt;record id=&quot;$model_name$_kanban&quot; model=&quot;ir.ui.view&quot;&gt;&#10;          &lt;field name=&quot;name&quot;&gt;$model_name$_kanban&lt;/field&gt;&#10;          &lt;field name=&quot;model&quot;&gt;$model_name$&lt;/field&gt;&#10;          &lt;field name=&quot;priority&quot;&gt;10&lt;/field&gt;&#10;          &lt;field name=&quot;arch&quot; type=&quot;xml&quot;&gt;&#10;              &lt;kanban class=&quot;o_kanban_mobile&quot;&gt;&#10;                  &lt;field name=&quot;name&quot;/&gt;&#10;                    &lt;field name=&quot;url&quot;/&gt;&#10;                    &lt;field name=&quot;option&quot;/&gt;&#10;                    &lt;field name=&quot;cate_id&quot; widget=&quot;many2one&quot;/&gt;&#10;                    &lt;field name=&quot;active&quot; widget=&quot;boolean_toggle&quot;/&gt;&#10;                    &lt;templates&gt;&#10;                        &lt;t t-name=&quot;kanban-box&quot;&gt;&#10;                            &lt;div t-attf-class=&quot;oe_kanban_card oe_kanban_global_click&quot;&gt;&#10;                                &lt;div class=&quot;o_kanban_record_top&quot;&gt;&#10;                                    &lt;div class=&quot;o_kanban_record_headings&quot;&gt;&#10;                                        &lt;strong class=&quot;o_kanban_record_title&quot;&gt;&lt;span&gt;&lt;t t-esc=&quot;record.name.value&quot;/&gt;&lt;/span&gt;&lt;/strong&gt;&#10;                                    &lt;/div&gt;&#10;                                    &lt;strong&gt;&lt;span&gt;&lt;t t-esc=&quot;record.cate_id.value&quot;/&gt;&lt;/span&gt;&lt;/strong&gt;&#10;                                &lt;/div&gt;&#10;&#10;                                &lt;div t-attf-class=&quot;oe_kanban_content&quot;&gt;&#10;                                &lt;div class=&quot;row mb4&quot;&gt;&#10;                                    &lt;div class=&quot;col-6&quot;&gt;&#10;                                            &lt;small&gt;&#10;                                                &lt;span&gt;&lt;field name=&quot;url&quot;/&gt;&lt;/span&gt;&#10;                                            &lt;/small&gt;&#10;                                    &lt;/div&gt;&#10;                                &lt;/div&gt;&#10;                                &lt;/div&gt;&#10;                                &lt;div class=&quot;o_kanban_record_bottom&quot;&gt;&#10;                                    &lt;div class=&quot;oe_kanban_bottom_left text-muted&quot;&gt;&#10;                                        &lt;span&gt;&lt;t t-esc=&quot;record.option.value&quot;/&gt;&lt;/span&gt;&#10;                                    &lt;/div&gt;&#10;                                    &lt;div class=&quot;oe_kanban_bottom_right&quot;&gt;&#10;                                        &lt;span class=&quot;float-right text-right&quot;&gt;&#10;                                            &lt;field name=&quot;active&quot; widget=&quot;boolean_toggle&quot;/&gt;&#10;                                        &lt;/span&gt;&#10;                                    &lt;/div&gt;&#10;                                &lt;/div&gt;&#10;                            &lt;/div&gt;&#10;                        &lt;/t&gt;&#10;                    &lt;/templates&gt;&#10;                &lt;/kanban&gt;&#10;          &lt;/field&gt;&#10;      &lt;/record&gt;" description="odoo看板2" toReformat="true" toShortenFQNames="true">
+    <variable name="model_name" expression="fileNameWithoutExtension()" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="XML_TEXT" value="true" />
+    </context>
+  </template>
+</templateSet>

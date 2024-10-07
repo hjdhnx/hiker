@@ -1,0 +1,541 @@
+<html>
+<head>
+    <title>主页时钟天气-221203</title>
+    <meta charset="utf-8">
+    <meta http-equiv="Cache-Control" content="no-siteapp;no-transform">
+    <meta name="applicable-device" content="pc,mobile">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <link rel="stylesheet" href="https://www.layuicdn.com/layui-v2.5.7/css/layui.css?v=3.2.0" media="all">
+    <script src="https://cdn.bootcdn.net/ajax/libs/layui/2.5.7/layui.js?v=1614925599774" charset="utf-8"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js?t=3.5.1"></script>
+</head>
+
+<body style="text-align: center"><!-- 要显示的元素都在Div里，ABC三个模板怎么改都行，每要增加一个显示页面，到【动画逻辑】和【div层级限定】增加对应设置。（div一个父级包含一个透明层与显示层，透明层999在最高层） -->
+
+<div class="a-nav item" id='clock' style="display: none;"><!-- 时钟容器 style="display: none;"为先隐藏-->
+    <div class="aclass"  style="width: 100%;height: 80%;"></div>
+    <div ><!-- 这个层级div替换自己的时钟链接 -->
+        <!--                <object style="border:0px" type="text/x-scriptlet" id='clock_obj' data="https://www.521x5.com/img/time.html" width="100%" height="100%">-->
+        <object style="border:0px;margin-top: 0px" type="text/x-scriptlet" id='clock_obj' data="file:///storage/emulated/0/Android/data/com.example.hikerview/files/Documents/rules/dzHouse/html/白色时钟.html" width="90%" height="80%">
+        </object>
+        <div id="showHistory" style="margin-top: 0px">
+            <!--                    <span id="workdayText" style="color: #ff5358;font-size: 18px;letter-spacing: 1px;"></span><br>-->
+            <span id="clockText" style="color: #34b1ff;font-size: 12px;letter-spacing: 0px;"></span>
+            <span id="workdayText" style="color: #ff9044;font-size: 18px;letter-spacing: 1px;"></span>
+        </div>
+    </div>
+</div>
+
+<div class="b-nav item" id='weather'><!-- 天气容器 -->
+    <button id="tq_set" class="layui-btn layui-btn-primary layui-btn-xs">设置城市</button>
+    <button id="tq_reset" class="layui-btn layui-btn-primary layui-btn-xs"><i class="layui-icon layui-icon-refresh"></i>重置</button>
+    <div class="bclass"  style="width: 100%;height: 800px;"></div>
+    <div><!-- 这个div内可直接替换你自己天气代码 -->
+        <!--                https://tianqiapi.com/api.php?style=ts&skin=durian&color=597e82&city=%E6%88%90%E9%83%BD&column=3-->
+        <iframe id='weather_iframe' scrolling="no" src=""
+                frameborder="0" width="100%" height="100%" allowtransparency="true"></iframe>
+    </div>
+</div>
+
+<div class="c-nav item" id='image' style="display: none;"><!-- 随机图容器 -->
+    <div class="cclass"></div>
+    <div class="img-cover" style="margin-top: 5px">
+        <!--   <object style="border:0px" type="text/x-scriptlet" data="这里填你的链接" width="100%"  height="100%">
+        </object> -->
+        <!--				<img src="https://api.mz-moe.cn/img/img659.jpg">-->
+        <img>
+    </div>
+</div>
+
+<script>
+    function darkModeHandler() {
+        const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+        if (mediaQuery.matches) {
+            let color = '#1b1b1b';
+            $('body').css({"background": color });
+        }
+    }
+    darkModeHandler();
+    if(typeof(fba)=='undefined'||!fba){
+        try {
+            eval(fy_bridge_app.getInternalJs());
+        }catch (e) {
+            log('初始化 getInternalJs 错误:'+e.message)
+        }
+    }
+    window.request = window.request00 || window.request;
+    // var host = 'http://hiker.nokia.press:8031';
+    var host = '';
+    // var jsApi = host+'/hikerule/rulelist.json?id=';
+    var jsApi = '';
+    host = fba.getVar('host');
+    jsApi  = fba.getVar('jsApi');
+    // let js_calendar =jsApi+'796';
+    let js_calendar ='http://dr.nokia.press/html/calendar.js';
+    // fba.log(js_calendar);
+    let local_calendar = 'hiker://files/rules/js/calendar.js';
+    // let html_clock =jsApi+'729';
+    let html_clock = 'http://dr.nokia.press/html/白色时钟.html';
+    // let html_clock ='file:///storage/emulated/0/Android/data/com.example.hikerview/files/Documents/rules/dzHouse/html/白色时钟.html';
+    // let html_clock ='/storage/emulated/0/Android/data/com.example.hikerview/files/Documents/rules/dzHouse/html/白色时钟.html';
+    // fy_bridge_app.log(html_clock);
+    let api_uploadImg = host+'/hikerule/image/add';
+    let setting_path = 'hiker://files/rules/home/settings.json';
+    try {
+        let calendar_code = request(local_calendar);
+        if(!calendar_code&&!/公历、农历互转/.test(calendar_code)){
+            fba.writeFile(local_calendar,request(js_calendar));
+        }
+        eval(request(local_calendar));
+        if(!request(setting_path)){
+            fba.writeFile(setting_path,JSON.stringify({home_flag:"clock"}));
+        }
+    }catch (e) {
+        // fba.log(e.message);
+        var head= document.getElementsByTagName('head')[0];
+        var script= document.createElement('script');
+        script.type= 'text/javascript';
+        script.src= js_calendar;
+        head.appendChild(script);
+    }
+    var dNow = new Date();
+    var dYear = dNow.getFullYear();
+    var dMonth = dNow.getMonth() + 1;
+    var dDay = dNow.getDate();
+
+    function showDate() {
+        // eval(request(local_calendar));
+        let date_obj = calendar.solar2lunar(dYear,dMonth,dDay);
+        let lValue = dYear+"年"+dMonth+"月"+dDay+"日 "+date_obj.ncWeek+" "+date_obj.gzYear+date_obj.Animal+"年 "+date_obj.IMonthCn+date_obj.IDayCn;
+        console.log(lValue);
+        return lValue;
+    }
+    var tq_load = false; //天气已加载
+    var img_load = false; // 图片已加载
+    var clock_load =  false; // 时钟已加载
+    var now_image_api = ''; //当前使用的随机图api
+    var img_list = request('hiker://files/rules/home/apiSet_image.txt').split('\n').filter(it=>!it.trim().startsWith('//'));
+    //fba.log(JSON.stringify(img_list));
+    if(img_list&&img_list.length>0){
+        img_list = img_list.map((it)=>{
+            return it.split(',')[1]
+        });
+    }else{
+        img_list = ['https://www.dmoe.cc/random.php'];
+    }
+    //长按事件触发
+    $.fn.longPress = function(fn) {
+        var $this = this;
+        for(var i = 0; i < $this.length; i++) {
+            (function(target) {
+                var timeout;
+                target.addEventListener('touchstart', function(event) {
+                    timeout = setTimeout(function() {
+                        //fn.apply(target);
+                        fn(event);
+                    }, 2000);
+                }, false);
+                target.addEventListener('touchend', function(event) {
+                    clearTimeout(timeout);
+                }, false);
+            })($this[i]);
+        }
+    };
+    function parseURI(url) {
+        var m = String(url).replace(/^\s+|\s+$/g, '').match(/^([^:\/?#]+:)?(\/\/(?:[^:@]*(?::[^:@]*)?@)?(([^:\/?#]*)(?::(\d*))?))?([^?#]*)(\?[^#]*)?(#[\s\S]*)?/);
+        // authority = '//' + user + ':' + pass '@' + hostname + ':' port
+        return (m ? {
+            href     : m[0] || '',
+            protocol : m[1] || '',
+            authority: m[2] || '',
+            host     : m[3] || '',
+            hostname : m[4] || '',
+            port     : m[5] || '',
+            pathname : m[6] || '',
+            search   : m[7] || '',
+            hash     : m[8] || ''
+        } : null);
+    }
+
+    function absolutizeURI(base, href) {// RFC 3986
+        function removeDotSegments(input) {
+            var output = [];
+            input.replace(/^(\.\.?(\/|$))+/, '')
+                .replace(/\/(\.(\/|$))+/g, '/')
+                .replace(/\/\.\.$/, '/../')
+                .replace(/\/?[^\/]*/g, function (p) {
+                    if (p === '/..') {
+                        output.pop();
+                    } else {
+                        output.push(p);
+                    }
+                });
+            return output.join('').replace(/^\//, input.charAt(0) === '/' ? '/' : '');
+        }
+
+        href = parseURI(href || '');
+        base = parseURI(base || '');
+
+        return !href || !base ? null : (href.protocol || base.protocol) +
+            (href.protocol || href.authority ? href.authority : base.authority) +
+            removeDotSegments(href.protocol || href.authority || href.pathname.charAt(0) === '/' ? href.pathname : (href.pathname ? ((base.authority && !base.pathname ? '/' : '') + base.pathname.slice(0, base.pathname.lastIndexOf('/') + 1) + href.pathname) : base.pathname)) +
+            (href.protocol || href.authority || href.pathname ? href.search : (href.search || base.search)) +
+            href.hash;
+    }
+
+    function urljoin(base,path){
+        if(path.startsWith('http')||path.startsWith('hiker')){
+            //fba.log("检测到完整图片:"+path);
+            return path
+        }
+        else if(!path){
+            return base
+        }else{
+            try {
+                let path_arr = path.split('/');
+                let path_name = encodeURIComponent(decodeURIComponent(path_arr[path_arr.length-1]));
+                path_arr[path_arr.length-1] = path_name;
+                return absolutizeURI(base,path_arr.join('/'))
+            }catch (e) {
+                fba.log(e.message);
+                fba.log(base+'---'+path);
+                return ''
+            }
+        }
+    }
+
+    function getOne(items) {return  items[Math.floor(Math.random()*items.length)];}
+
+    function init_weather(){
+        try {
+            let  settings = request(setting_path) || "{}";
+            settings = JSON.parse(settings);
+            // let city = settings.city||"成都";
+            let city = settings.city||"";
+            $('#weather_iframe').attr('src','https://tianqiapi.com/api.php?style=ts&skin=durian&color=597e82&column=3&city='+city);
+            // $('#weather_iframe').attr('src','https://i.tianqi.com/?c=code&a=getcode&id=13&py=&icon=1');
+            tq_load = true;
+        }catch (e) {
+            $('#weather_iframe').attr('src','https://tianqiapi.com/api.php?style=ts&skin=durian&color=597e82&column=3&city=');
+            // $('#weather_iframe').attr('src','https://i.tianqi.com/?c=code&a=getcode&id=13&py=&icon=1');
+            tq_load = true;
+        }
+    }
+
+    function getNowFormatDate() {
+        var date = new Date();
+        var seperator1 = "-";
+        var seperator2 = ":";
+        var month = date.getMonth() + 1;
+        var strDate = date.getDate();
+        var strHours = date.getHours();
+        var strMinutes = date.getMinutes();
+        var strSeconds = date.getSeconds()+1;
+        if (month >= 1 && month <= 9) {
+            month = "0" + month
+        }
+        if (strDate >= 0 && strDate <= 9) {
+            strDate = "0" + strDate
+        }
+        if (strHours >= 0 && strHours <= 9) {
+            strHours = "0" + strHours
+        }
+        if (strMinutes >= 0 && strMinutes <= 9) {
+            strMinutes = "0" + strMinutes
+        }
+        if (strSeconds >= 0 && strSeconds <= 9) {
+            strSeconds = "0" + strSeconds
+        }
+        var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate + " " + strHours + seperator2 + strMinutes + seperator2 + strSeconds;
+        return currentdate
+    }
+
+    function init_clock() {
+        // http://www.time163.com/shizhong.html
+        let clocks = [html_clock];
+        // let clocks = ['file:///storage/emulated/0/Android/data/com.example.hikerview/files/Documents/rules/dzHouse/html/白色时钟.html'];
+        // let clocks = ['https://www.idcd.com/tool/time/3'];
+        $('#clock_obj').attr('data',getOne(clocks));
+        let data = showDate();
+        $('#clockText').text(data.substring(5,data.length));
+        setInterval(function() {
+            let time = getNowFormatDate();
+            $('#workdayText').text(time.split(" ")[1]);
+        },300);
+        clock_load = true;
+    }
+
+    function init_image() {
+        try {
+            now_image_api = getOne(img_list);
+            // fba.log(now_image_api);
+            let headers = {'Accept':'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8','Accept-Encoding':
+                    'zh-CN,zh-TW;q=0.9,zh;q=0.8,en-US;q=0.7,en;q=0.6','Referer':'','Sec-Fetch-Dest':'image',
+                'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.146 Safari/537.36'
+            };
+            // let image = request(img_url,{headers:headers,withHeaders:true,redirect:false});
+            requestAsync(now_image_api,{headers:headers,withHeaders:true,redirect:false},function (key,code) {
+                let codeJson = JSON.parse(code);
+                let body = codeJson.body;
+                let headers = codeJson.headers;
+                let has_headers=headers.location&&headers.location.length>0;
+                if(!has_headers){
+                    //fba.log("无返回重定向错误:"+JSON.stringify(headers));
+                }else{
+                    //fba.log("图片重定向到:"+headers.location.join(''));
+                }
+                let img_url = has_headers?urljoin(now_image_api,headers.location.join('')):'https://www.dmoe.cc/random.php';
+                // encodeURIComponent
+                $('img').attr('src',img_url);
+                //fba.log(img_url);
+                img_load = true;
+            });
+        }
+        catch (e) {
+            fba.log(e.message);
+            $('img').attr('src','https://www.dmoe.cc/random.php');
+            img_load = true;
+        }
+    }
+
+    function get_settings(key,value) {
+        let  settings = request(setting_path) || JSON.stringify({home_flag:"clock"});
+        settings = JSON.parse(settings);
+        return settings[key]||value||"";
+    }
+
+    function set_home(key,value) {
+        let  settings = request(setting_path) || JSON.stringify({home_flag:"clock"});
+        settings = JSON.parse(settings);
+        settings[key] = value;
+        fba.writeFile(setting_path,JSON.stringify(settings));
+    }
+
+    layui.use(['form', 'laypage', 'layer','layedit'], function() {
+        var form = layui.form //表单
+            , layedit = layui.layedit
+            , layer = layui.layer; //弹层
+
+        $('#tq_set').on('click', function(){
+            let  settings = "{}";
+            try {
+                settings = request(setting_path) || settings;
+            }catch (e) {
+                layer.msg(e.message);
+                return
+            }
+            settings = JSON.parse(settings);
+            let city = settings.city||"成都";
+            try {
+                layer.prompt({
+                    formType: 2,
+                    value: city,
+                    title: '请输入你所在的城市',
+                    area: ['200px', '40px'] //自定义文本域宽高
+                }, function(city, index, elem){
+                    if(city){
+                        settings.city = city;
+                        $('#weather_iframe').attr('src','https://tianqiapi.com/api.php?style=ts&skin=durian&color=597e82&city='+city+'&column=3');
+                        // $('#weather_iframe').attr('src','https://i.tianqi.com/?c=code&a=getcode&id=13&py=&icon=1');
+                        fba.writeFile(setting_path,JSON.stringify(settings));
+                    }
+                    layer.close(index);
+                });
+            }catch (e) {layer.msg(e.message)}
+        });
+
+        $('#tq_reset').on('click', function(){
+            try {
+                let  settings = request(setting_path) || "{}";
+                settings = JSON.parse(settings);
+                settings.city = "";
+                $('#weather_iframe').attr('src','https://tianqiapi.com/api.php?style=ts&skin=durian&color=597e82&column=3&city=');
+                // $('#weather_iframe').attr('src','https://i.tianqi.com/?c=code&a=getcode&id=13&py=&icon=1');
+                // $('#weather_iframe').attr('src','https://i.tianqi.com/?c=code&a=getcode&id=48&num=6&icon=1');
+                fba.writeFile(setting_path,JSON.stringify(settings));
+            }catch (e) {layer.msg(e.message); }
+        });
+        $('#showHistory').on('click', function(){
+            layer.msg('查看历史上的今天？', {
+                time: 2000,
+                btn: ['确定', '取消'] //按钮
+                , yes: function (index, layero) {
+                    try {
+                        let rule = "js:var res={};var d=[];var date = new Date(); html=getResCode();let back=JSON.parse(html);d.push({title:'下面是'+back.result.length+'条历史上的今天事件',desc:'',url:'https://www.xiaodoubi.com/',col_type:'text_center_1'});if(back.today){for(var i in back.result){d.push({title:'““””<small>'+back.result[i].title+'</small>',desc:back.result[i].year+'年'+('00' + (1 + date.getMonth())).slice(-2) + '月' + ('00' + date.getDate()).slice(-2) + '日',url:\"toast://\"+JSON.stringify(back.result[i]),col_type:'text_center_1'})}}d.push({col_type:'long_text'});res.data=d;setHomeResult(res);";
+                        fba.toDetailPage('历史上的今天', '#noHistory#https://www.ipip5.com/today/api.php?type=json', 'x5二级', 'icon_2_round', rule, '');
+                    }catch (e) {layer.msg(e.message);}
+                },
+
+            });
+        });
+
+        $(".cclass").mousedown(function() {
+            // fba.writeFile(setting_path,fetch());
+            timeout= setTimeout(function() {
+                layer.alert('你长按我做什么?再按，再按我也没法给你下载啊<br>本来就是随机图，你想干嘛呢');
+            }, 1000);
+        });
+
+        $(".cclass").mouseup(function() {
+            clearTimeout(timeout);//清理掉定时器
+        });
+
+        //触摸长按事件
+        $(".cclass").longPress(function(e){
+            let img_url = $('img').attr('src');
+            if(img_url){
+                layer.msg('保存当前图片到本地？', {
+                    time: 2000,
+                    btn: ['确定','报告错误','取消'] //按钮
+                    ,yes: function(index, layero){
+                        let uploadApi = api_uploadImg+'?referer='+now_image_api+'&location='+img_url;
+                        let headers = {'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.146 Safari/537.36'};
+                        requestAsync(uploadApi,{headers:headers},function (key,code) {
+                            if(code.indexOf('成功')>-1){
+                                // layer.msg('保存成功');
+                                console.log(code);
+                            }else{
+                                fba.log(code);
+                                // alert(code);
+                            }
+                        });
+                        let path = 'hiker://files/rules/home/images/saved.json';
+                        let  saved = request(path) || "[]";
+                        saved = JSON.parse(saved);
+                        saved.push({referer:now_image_api,location:img_url});
+                        fba.writeFile(path,JSON.stringify(saved));
+                        fba.log('图片链接:'+img_url+'已更新到'+path);
+                        try {
+                            fba.saveImage(img_url,null);
+                        }catch (e) {
+                            fba.log(e.message);
+                            layer.msg('当前版本似乎不支持保存图片\n最低要求3月22日版本')
+                        }
+                    }
+                    ,btn2: function(index, layero){
+                        let path = 'hiker://files/rules/home/images/error.json';
+                        let  errors = request(path) || "[]";
+                        errors = JSON.parse(errors);
+                        errors.push({referer:now_image_api,location:img_url});
+                        fba.writeFile(path,JSON.stringify(errors));
+                        layer.msg('错误详情已更新到'+path);
+                    }
+                });
+            }
+        });
+
+    });
+
+    var s = 1000; // 动画时长
+    function show_div(id,t) {
+        switch (id) {
+            case 'weather':
+                try {
+                    fba.refreshX5Desc('list&&210');
+                }catch (e) {}
+                if(!tq_load){
+                    init_weather();
+                }
+                break;
+            case 'image':
+                try {
+                    fba.refreshX5Desc('list&&220');
+                }catch (e) {}
+                // alert('已调整x5高度');
+                if(!img_load){
+                    init_image();
+                }
+                break;
+            case 'clock':
+                try {
+                    fba.refreshX5Desc('list&&180');
+                }catch (e) {}
+                if(!clock_load){
+                    init_clock();
+                }
+                break;
+            default:
+                try {
+                    fba.refreshX5Desc('list&&220');
+                }catch (e) {}
+                init_clock();
+        }
+        t = t || s;
+        $('.item').hide();
+        // $('#'+id).show();
+        $('#'+id).fadeIn(t);
+    }
+
+    // 时钟，天气，随机图片
+    $('.aclass').on('click', function(){
+        show_div('weather');
+        try {
+            set_home('home_flag','weather');
+        }catch (e) {}
+    });
+
+    $('.bclass').on('click', function(){
+        show_div('image');
+        try {
+            set_home('home_flag','image');
+        }catch (e) {}
+    });
+
+    $('.cclass').on('click', function(){
+        show_div('clock');
+        try {
+            set_home('home_flag','clock');
+        }catch (e) {}
+    });
+
+    try{
+        var flag = get_settings('home_flag','clock');
+        show_div(flag,100);
+    }catch (e) {
+        alert(e.message);
+        // flag = 'weather';
+        flag = 'clock';
+        show_div(flag,100);
+    }
+</script>
+
+</body>
+
+<style>/* 【Div层级限定】和图片样式设定，每加一div都要对应递增一对设置（.*-nav和.*class） */
+.img-cover{
+    background-size:cover;/* 这里别动 */
+}
+.img-cover img{/* 这里修改图片&圆角&阴影  */
+    width: 95%;
+    height: 200px;
+    border-radius: 20px;
+    box-shadow:-2px 2px 5px rgba(0,0,0,0.6)
+}
+
+.a-nav{
+    position: relative;
+}
+.aclass{
+    position: absolute;
+    z-index: 999;
+}
+.b-nav{
+    position: relative;
+}
+.bclass{
+    position: absolute;
+    z-index: 999;
+}
+.c-nav{
+    position: relative;
+}
+.cclass{
+    position: absolute;
+    z-index: 999;
+    width: 90%;
+    height: 800px;
+}
+</style>
+
+</html>

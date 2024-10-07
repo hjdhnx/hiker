@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>道长专用多线程x5</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link href="https://cdn.bootcdn.net/ajax/libs/dplayer/1.9.1/DPlayer.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcdn.net/ajax/libs/dplayer/1.9.1/DPlayer.min.js"></script>
+
+</head>
+<body>
+<div id="tips">欢迎海阔视界用户使用本页面,你的本地环境看起来一切正常</div>
+</body>
+<script>
+    // let srcs = ['https://player.maqq.cn/?url=https://v.youku.com/v_show/id_XNTE5ODYxMjAzNg==.html','http://jx.zhiaiyy.top/?url=https://v.youku.com/v_show/id_XNTE5ODYxMjAzNg==.html'];
+    let srcs = [];
+    if(typeof(fy_bridge_app)!=='undefined'){
+        fy_bridge_app.log('道长通免正在准备资源...');
+        srcs = JSON.parse(fy_bridge_app.getVar('x5List'));
+    }else{
+        document.getElementById('tips').innerText = '海阔视界专用,by道长'
+    }
+    for(let i in srcs){
+        let iframe = document.createElement('iframe');
+        iframe.src=srcs[i];
+        document.body.appendChild(iframe);
+    }
+</script>
+</html>

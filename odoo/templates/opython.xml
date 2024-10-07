@@ -1,0 +1,49 @@
+<templateSet group="opython">
+  <template name="opaction" value="val =  {&#10;            'name': &quot;$action_name$&quot;,&#10;            'view_mode': 'tree,form',&#10;            'res_model': '$module$.$menu_name$',&#10;            'domain': [('id', '=', self.receivable_id.id)],&#10;            'type': 'ir.actions.act_window',&#10;            'context': {'form_view_ref': '$module$.form_view','tree_view_ref': '$module$.tree_view',&#10;                        },&#10;            'target': 'self',&#10;    }" description="odoo动作" toReformat="true" toShortenFQNames="true">
+    <variable name="action_name" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="module" expression="fileNameWithoutExtension()" defaultValue="" alwaysStopAt="true" />
+    <variable name="menu_name" expression="fileNameWithoutExtension()" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="Python" value="true" />
+    </context>
+  </template>
+  <template name="opmail" value="_inherit = ['mail.thread', 'mail.activity.mixin']" description="odoo继承消息" toReformat="true" toShortenFQNames="true">
+    <context>
+      <option name="Python" value="true" />
+    </context>
+  </template>
+  <template name="opmodel" value="class $model_name$(models.Model):&#10;    _name = '$model$'&#10;    _inherit = ['mail.thread', 'mail.activity.mixin']&#10;    _description = '描述'&#10;    _rec_name = &quot;name&quot;&#10;    _order = 'code, name asc'" description="odoo模型" toReformat="true" toShortenFQNames="true">
+    <variable name="model_name" expression="fileNameWithoutExtension()" defaultValue="" alwaysStopAt="true" />
+    <variable name="model" expression="fileNameWithoutExtension()" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="Python" value="true" />
+    </context>
+  </template>
+  <template name="opimport" value="from odoo import models, fields, api&#10;from odoo.exceptions import UserError, ValidationError" description="odoo引入包" toReformat="true" toShortenFQNames="true">
+    <context>
+      <option name="Python" value="true" />
+    </context>
+  </template>
+  <template name="opactive" value="active = fields.Boolean(string='是否启用',default=True)" description="odoo启用字段" toReformat="true" toShortenFQNames="true">
+    <context>
+      <option name="Python" value="true" />
+    </context>
+  </template>
+  <template name="opinstall" value="'installable': True,&#10;'application': True,&#10;'sequence': '1',&#10;'auto_install': False" description="odoo模块安装信息" toReformat="true" toShortenFQNames="true">
+    <context>
+      <option name="Python" value="true" />
+    </context>
+  </template>
+  <template name="opoption" value="department_type_option = [(1,&quot;临床&quot;),(2,&quot;医技&quot;),(3,&quot;医辅&quot;),(4,&quot;行政后勤&quot;)]&#10;department_type = fields.Selection(department_type_option,string=&quot;科室类别&quot;)" description="odoo选项字段" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="Python" value="true" />
+    </context>
+  </template>
+  <template name="opmodel_wizard" value="class $model_name$(models.TransientModel):&#10;    _name = '$model$'&#10;    _description = '向导'" description="odoo瞬态模型" toReformat="true" toShortenFQNames="true">
+    <variable name="model_name" expression="fileNameWithoutExtension()" defaultValue="" alwaysStopAt="true" />
+    <variable name="model" expression="fileNameWithoutExtension()" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="Python" value="true" />
+    </context>
+  </template>
+</templateSet>

@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>批量删除/导出解析</title>
+    <style type=text/css>
+        body {
+            margin: 0 0px 0 0px;
+            padding: 0 0px 0 0px;
+            font-family: "Microsoft YaHei","宋体","Segoe UI", "Lucida Grande", Helvetica, Arial,sans-serif, FreeSans, Arimo;
+        }
+        /*顶部父元素*/
+        .fung {
+            z-index:999;
+            position: fixed;
+            background-color: white;
+            padding: 2px 0 2px 10px;
+            width:100%;
+            top:0;
+        }
+        /*顶部按钮*/
+        .butt a button{
+            background-color: rgba(245, 245, 245, 0.6);
+            border:insert;
+            border-radius:7px;
+            border-width:2.5px;
+            border-color:rgba(0, 191, 255, 0.6);
+            font-size:18px;
+        }
+        #div2{
+            margin-top:22px;
+        }
+        /*父元素*/
+        div.box {
+            height: 40px;
+            position: relative;
+            width:96%;
+            margin-left:2%;
+        }
+        form {
+            position: relative;
+        }
+        /*列表*/
+        .lab label {
+            width: 100%;
+            height: 38px;
+            text-align:center;
+            line-height:40px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            position: absolute;
+            top: 0;
+        }
+        /*上阴影*/
+        .lab label {
+            border-radius: 4px;
+            box-shadow: 0 5px 20px -5px #00BFFF inset;
+
+        }
+        /*下阴影*/
+        .lab{
+            border-radius: 4px;
+            margin:5px auto;
+            height:38px;
+            width:100%;
+            box-shadow: 0 -5px 20px -5px #00BFFF inset;
+        }
+        /*勾选*/
+        input{
+            height: 18px;
+            width: 18px;
+        }
+        .box input {
+            top:7px;
+            right:1px;
+            cursor: pointer;
+            position: absolute;
+        }
+    </style>
+</head>
+
+<body>
+<div class="fung">
+    <div class="butt" style="width:95%;">
+        <a style="float:right;">
+            <label style="float:left;border:none;height:28px;width:38px;background: url(https://z3.ax1x.com/2021/10/25/5hXOaQ.png) no-repeat 10px 8px/20px 20px;" onclick="refreshPage();">
+            </label>
+            <button style="width: auto;color: grey;">全选
+                <input type="checkbox" onclick="changeState(this.checked)">
+            </button>
+        </a>
+        <a style="float:left;">
+            <button  style="width: 65px;color: rgba(227, 23, 13, 0.7);" onclick="deleteKey();">删 除
+            </button>
+            <button  style="width: 65px;color: rgba(227, 23, 13, 0.7);" onclick="exports();">导出
+            </button>
+            <button  style="width: 65px;color: rgba(227, 23, 13, 0.7);" onclick="update();">更新
+            </button>
+        </a>
+    </div>
+</div>
+<br>
+<div id="div2"></div>
+</body>
+<script>
+    eval(fy_bridge_app['getInternalJs']());
+    var newRoute = 'hiker://files/rules/DuanNian/MyParse.json';
+    var newConfig = fy_bridge_app['fetch'](newRoute);
+    eval('var MyParseS =' + newConfig + ';');
+    var jxList = MyParseS['title'];
+    var tickBox = '';
+    for (let i in jxList) {
+        var lb = jxList[i];
+        tickBox += '<div class="box bar"><form><div class="lab"><label>' + lb + '</label></div><input type="checkbox" name="tickBox" title="' + lb + '" value="' + i + '"></form></div>';
+    }
+    document['getElementById']('div2')['insertAdjacentHTML']('afterend', tickBox);
+
+    function update(){
+        try {
+            let localHtml = 'hiker://files/cache/plscParse.html';
+            fba.writeFile(localHtml,request('https://gitcode.net/qq_32394351/dr/-/raw/master/dp/batch_delete.html'));
+            refreshPage();
+            // alert('更新完毕')
+        }catch (e) {
+            alert('错误:'+e.message);
+        }
+    }
+
+    function Toast(_0x3c454b, _0x2df87a) {
+        var _0x49ee91 = {
+            'emBtT': function(_0x53ef10, _0x46bab0) {
+                return _0x53ef10 === _0x46bab0;
+            },
+            'qXRdN': 'VXKlf',
+            'KcHpz': function(_0x383759, _0x5d7c09) {
+                return _0x383759 + _0x5d7c09;
+            },
+            'zelUi': function(_0x3a0ff2, _0x116b1c) {
+                return _0x3a0ff2 + _0x116b1c;
+            },
+            'owTnZ': 's ease-in, opacity ',
+            'tIKnO': function(_0x268f46, _0x5e2d39, _0x3a8dea) {
+                return _0x268f46(_0x5e2d39, _0x3a8dea);
+            },
+            'KVAzX': function(_0x446271, _0xa033b) {
+                return _0x446271 * _0xa033b;
+            },
+            'Sltqy': function(_0x35b33f, _0x45055d) {
+                return _0x35b33f(_0x45055d);
+            },
+            'UWHmE': function(_0x1fe581, _0x5be7e9, _0x2aed5d) {
+                return _0x1fe581(_0x5be7e9, _0x2aed5d);
+            }
+        };
+        _0x2df87a = _0x49ee91['Sltqy'](isNaN, _0x2df87a) ? 0xbb8 : _0x2df87a;
+        var _0x7f4697 = document['createElement']('label');
+        _0x7f4697['innerHTML'] = _0x3c454b;
+        _0x7f4697['style']['cssText'] = 'width:100px; min-width:36px; background:#311; opacity:0.6; height:auto;min-height: 45px; color:#fff; text-align:center; line-height:45px;border-radius:10px; position:fixed; top:60%; left:37%; z-index:999999;';
+        document['body']['appendChild'](_0x7f4697);
+        _0x49ee91['UWHmE'](setTimeout, function() {
+            var _0x470b57 = 0.5;
+            _0x7f4697['style']['webkitTransition'] = _0x49ee91['KcHpz'](_0x49ee91['KcHpz'](_0x49ee91['zelUi']('-webkit-transform ', _0x470b57) + _0x49ee91['owTnZ'], _0x470b57), 's ease-in');
+            _0x7f4697['style']['opacity'] = '0';
+            _0x49ee91['tIKnO'](setTimeout, function() {
+                if (_0x49ee91['emBtT'](_0x49ee91['qXRdN'], 'VXKlf')) {
+                    document['body']['removeChild'](_0x7f4697);
+                } else {
+                    document['body']['removeChild'](_0x7f4697);
+                }
+            }, _0x49ee91['KVAzX'](_0x470b57, 0x3e8));
+        }, _0x2df87a);
+    }
+
+    function changeState(_0x2800c1) {
+        var _0x592dd0 = {
+            'CQIvy': function(_0x56bd47, _0xeb9dd3) {
+                return _0x56bd47 + _0xeb9dd3;
+            },
+            'lZBbK': function(_0x4b8392, _0x35ad0e) {
+                return _0x4b8392 + _0x35ad0e;
+            },
+            'sqOhB': '-webkit-transform ',
+            'PVWyr': function(_0x56da34, _0x840d14, _0x52d553) {
+                return _0x56da34(_0x840d14, _0x52d553);
+            },
+            'nfsRM': '1|3|4|2|5|0',
+            'RGNGB': function(_0x42305e, _0x490c9b) {
+                return _0x42305e(_0x490c9b);
+            },
+            'GrZNe': 'label',
+            'bqRhG': 'input',
+            'Zorpv': function(_0xe96bc4, _0x4db1df) {
+                return _0xe96bc4 < _0x4db1df;
+            },
+            'ekBSB': 'SGzyc',
+            'AGeJV': function(_0x8f9ec5, _0x17cec1) {
+                return _0x8f9ec5 == _0x17cec1;
+            },
+            'aZtSe': 'checkbox'
+        };
+        var _0x2132b9 = document['getElementsByTagName'](_0x592dd0['bqRhG']);
+        for (var _0x67e70d = 0x0; _0x592dd0['Zorpv'](_0x67e70d, _0x2132b9['length']); _0x67e70d++) {
+            if (_0x592dd0['ekBSB'] !== 'drSPU') {
+                if (_0x592dd0['AGeJV'](_0x2132b9[_0x67e70d]['type'], _0x592dd0['aZtSe'])) {
+                    _0x2132b9[_0x67e70d]['checked'] = _0x2800c1;
+                }
+            } else {
+                var _0xecb18f = _0x592dd0['nfsRM']['split']('|'),
+                    _0x470135 = 0x0;
+                while (!![]) {
+                    switch (_0xecb18f[_0x470135++]) {
+                        case '0':
+                            _0x592dd0['PVWyr'](setTimeout, function() {
+                                var _0xdd20d6 = 0.5;
+                                _0x1fddd4['style']['webkitTransition'] = _0x592dd0['CQIvy'](_0x592dd0['CQIvy'](_0x592dd0['CQIvy'](_0x592dd0['lZBbK'](_0x592dd0['sqOhB'], _0xdd20d6), 's ease-in, opacity '), _0xdd20d6), 's ease-in');
+                                _0x1fddd4['style']['opacity'] = '0';
+                                _0x592dd0['PVWyr'](setTimeout, function() {
+                                    document['body']['removeChild'](_0x1fddd4);
+                                }, _0xdd20d6 * 0x3e8);
+                            }, duration);
+                            continue;
+                        case '1':
+                            duration = _0x592dd0['RGNGB'](isNaN, duration) ? 0xbb8 : duration;
+                            continue;
+                        case '2':
+                            _0x1fddd4['style']['cssText'] = 'width:100px; min-width:36px; background:#311; opacity:0.6; height:auto;min-height: 45px; color:#fff; text-align:center; line-height:45px;border-radius:10px; position:fixed; top:60%; left:37%; z-index:999999;';
+                            continue;
+                        case '3':
+                            var _0x1fddd4 = document['createElement'](_0x592dd0['GrZNe']);
+                            continue;
+                        case '4':
+                            _0x1fddd4['innerHTML'] = msg;
+                            continue;
+                        case '5':
+                            document['body']['appendChild'](_0x1fddd4);
+                            continue;
+                    }
+                    break;
+                }
+            }
+        }
+    }
+
+    function deleteKey() {
+        var _0x132c26 = {
+            'mtnhr': 'tickBox',
+            'PJfSf': function(_0x2f72f1, _0x40d4fb) {
+                return _0x2f72f1(_0x40d4fb);
+            },
+            'FZIAv': function(_0x54e523, _0x1c02d9) {
+                return _0x54e523 + _0x1c02d9;
+            },
+            'YsnOV': function(_0x34e6a8, _0xacb166) {
+                return _0x34e6a8 - _0xacb166;
+            },
+            'GFEBF': function(_0xe5205a, _0x30e0e1) {
+                return _0xe5205a >= _0x30e0e1;
+            },
+            'rePgZ': function(_0x41c00c, _0x180cd7) {
+                return _0x41c00c !== _0x180cd7;
+            },
+            'ujiiw': 'ExQKM',
+            'chCza': '删除成功'
+        };
+        var _0x5f2ca3 = document['getElementsByName'](_0x132c26['mtnhr']);
+        var _0x2d3deb = [];
+        var _0x21a55a = [];
+        for (i in _0x5f2ca3) {
+            if (_0x5f2ca3[i]['checked']) {
+                _0x2d3deb['push'](_0x5f2ca3[i]['value']);
+                _0x21a55a['push'](_0x5f2ca3[i]['title']);
+            }
+        }
+        var _0x4c99c4 = _0x2d3deb['length'];
+        var _0x2517e8 = _0x132c26['PJfSf'](confirm, _0x132c26['FZIAv'](_0x132c26['FZIAv']('已选', _0x4c99c4), '个解析\x0a\x0a确定删除？'));
+
+        if (_0x2517e8 == !![]) {
+            for (let _0x5d329c = _0x132c26['YsnOV'](_0x4c99c4, 0x1); _0x132c26['GFEBF'](_0x5d329c, 0x0); _0x5d329c--) {
+                if (_0x132c26['rePgZ'](_0x132c26['ujiiw'], _0x132c26['ujiiw'])) {
+                    _0x2d3deb['push'](_0x5f2ca3[_0x5d329c]['value']);
+                    _0x21a55a['push'](_0x5f2ca3[_0x5d329c]['title']);
+                } else {
+                    MyParseS['title']['splice'](_0x2d3deb[_0x5d329c], 0x1);
+                    delete MyParseS['codes'][_0x21a55a[_0x5d329c]];
+                }
+            }
+            fy_bridge_app['writeFile'](newRoute, $$$['stringify'](MyParseS));
+            fy_bridge_app['refreshPage'](![]);
+            return Toast(_0x132c26['chCza'], 0x3e8);
+        }
+    }
+
+    function exports(){//导出选中的 解析
+        var ticks = document.getElementsByName('tickBox');
+        var idexs = [];//存的idex 位置
+        var titles = [];
+        for (let i in ticks) {
+            if (ticks[i].checked) {
+                idexs.push(ticks[i].value);
+                titles.push(ticks[i].title);
+            }
+        }
+        var cnt = titles.length;
+       if(confirm('已选择:'+cnt+'条解析,确认导出?')){
+          fba.log('导出'+titles[0]+'等'+cnt+'条解析');
+           let setFile = request('hiker://files/rules/DuanNian/MyParse.json');
+           try {
+               eval('json='+setFile);
+           }catch (e) {
+               log('Json解析发生了错误:'+e.message);
+           }
+           fba.log('读取本地插件列表成功');
+           var urlArr = [];
+           // var titleArr = json.title;//全部的
+           var titleArr = titles; // 选中的
+           try {
+               titleArr.forEach((it) => {
+                   urlArr.push(json.codes[it]);
+               });
+               fba.log('待导出代码装载完毕');
+           }
+           catch (e) {
+               fba.log('待导出代码装载错误:'+e.message);
+           }
+           eval(request('https://cdn.jsdelivr.net/npm/js-base64@3.7.2/base64.min.js'));//加载base64库
+           function base64Encode(str){
+               return Base64.encode(str);
+           }
+           function base64Decode(str){
+               return Base64.decode(str);
+           }
+           let outText='';
+           try {
+               let jxCode = [];//装载导出txt列表
+               titleArr.forEach((it) => {
+                   let i = titleArr.indexOf(it);
+                   let code = urlArr[i]||'';
+                   let outCode = (typeof(code)==='string')?code.trim():base64Encode(code.toString().trim());
+                   let outTitle = it.replace(/👉/g,'');
+                   if(outTitle.startsWith('http')&&(typeof(outCode)==='undefined'||!outCode)){
+                       jxCode.push(outTitle+','+outTitle);
+                   }else{
+                       jxCode.push(outTitle+','+outCode||'')
+                   }
+               });
+               outText = jxCode.join('\n');
+               fba.log('待导出文本构建完毕:'+outText.substr(0,200)+'...');
+           }catch (e) {
+               fba.log('发生错误:'+e.message);
+           }
+           let outPath = 'hiker://files/rules/DuanNian/MyParseOut_批量分享.txt';
+           if(outText) {//有文本的话
+               fba.writeFile(outPath, outText);
+           }
+           try {
+
+               let pastes = JSON.parse(fba.parseLazyRule('hiker://empty@lazyRule=.js:JSON.stringify(getPastes())'));
+               // let pastes = getPastes();
+               // let importUrl = fba.sharePaste(base64Encode(outText),pastes.slice(-1)[0]);
+               let importUrl = fba.parseLazyRule($$$().lazyRule((txt,pastes)=>{
+                   return sharePaste(txt, pastes.slice(-1)[0])
+               },base64Encode(outText),pastes));
+               let importCode = '魔断解析导入口令¥¥'+importUrl;
+               fba.log(importCode);
+               fba.copy(importCode);
+               fba.parseLazyRule($$$().lazyRule((tips)=>{
+                   toast(tips);
+                   return 'hiker://empty'
+               },'文件已导出到:'+outPath+'\n请自行通过MT管理器查看'));
+               // alert('文件已导出到:'+outPath+'\n请自行通过MT管理器查看');
+           }catch (e) {
+               fba.log('发生错误:'+e.message);
+               alert('网页中不能分享到云剪切板，已导出本地文件并复制路径:'+outPath+'\n请自行用mt管理器打开查看');
+               fba.copy(outPath);
+           }
+       }
+    }
+
+    function refreshPage() {
+        var _0x271bea = {
+            'wSXrd': function(_0x33fff4, _0x116c88) {
+                return _0x33fff4(_0x116c88);
+            },
+            'igPOd': '刷新了一下'
+        };
+        fy_bridge_app['refreshPage'](!![]);
+        return _0x271bea['wSXrd'](Toast, _0x271bea['igPOd']);
+    };
+    _0xodW = 'jsjiami.com.v6'
+</script>
+</html>

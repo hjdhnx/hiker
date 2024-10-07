@@ -1,0 +1,32 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>海阔视界神器-xml转json</title>
+</head>
+<h1>海阔视界道长静态文件库</h1>
+<a href='https://help.coding.net/docs/pages/operating.html'>腾讯PAGES部署教程</a>
+<a href='http://dr.nokia.press/html/白色时钟.html'>白色时钟</a>
+<label for="ret">xml2json结果:</label><input id="ret" value="" type="text"/>
+<span id="ret1"></span>
+<script src="https://gitcode.net/qq_32394351/dr/-/raw/master/js/fxp.min.js"></script>
+<script>
+    const parser = new fxp.XMLParser();
+    var xml = '';
+    var hiker = typeof (fy_bridge_app) !== 'undefined';
+    if(hiker){
+        fy_bridge_app.clearVar('xmlRet'); // 清除历史结果
+        xml = fy_bridge_app.getVar('xmlText');
+    }
+    if(xml) {
+        let obj = parser.parse(xml);
+        let xmlRet = JSON.stringify(obj);
+        // console.log(xmlRet);
+        document.querySelector('#ret').innerText = xmlRet;
+        document.querySelector('#ret1').innerText = xmlRet;
+        if(hiker){
+            fy_bridge_app.putVar('xmlRet',xmlRet); // 设置结果
+        }
+    }
+</script>
+
+</html>

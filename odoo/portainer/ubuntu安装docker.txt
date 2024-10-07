@@ -1,0 +1,72 @@
+首先更换阿里源
+rm /etc/apt/sources.list
+vi /etc/apt/sources.list
+
+把下面这些粘贴进去:
+deb http://mirrors.aliyun.com/ubuntu/ bionic main restricted universe multiverse
+deb http://mirrors.aliyun.com/ubuntu/ bionic-security main restricted universe multiverse
+deb http://mirrors.aliyun.com/ubuntu/ bionic-updates main restricted universe multiverse
+deb http://mirrors.aliyun.com/ubuntu/ bionic-proposed main restricted universe multiverse
+deb http://mirrors.aliyun.com/ubuntu/ bionic-backports main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ bionic main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ bionic-security main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ bionic-updates main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ bionic-proposed main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ bionic-backports main restricted universe multiverse
+
+:wq保存后更新以下
+
+sudo apt-get update
+sudo apt-get upgrade
+
+
+
+然后安docker
+sudo apt install docker.io
+sudo systemctl start docker
+sudo systemctl enable docker
+docker -v
+
+
+镜像换源加速
+/etc/docker/daemon.json
+
+{"registry-mirrors":["https://registry.docker-cn.com"]}
+
+重启docker
+
+sudo systemctl daemon-reload
+sudo systemctl restart docker
+
+安装portainer
+新方法:
+mkdir -p /data/portainer/data /data/portainer/public
+cd /data/portainer
+wget https://labx.me/dl/4nat/public.zip
+unzip public.zip
+docker run -d --restart=always --name portainer -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock -v /data/portainer/data:/data -v /data/portainer/public:/public portainer/portainer:latest
+
+汉化镜像:
+docker pull 6053537/portainer-ce  #直接用汉化版镜像
+docker volume create portainer_data
+docker run -d --name portainer -p 9000:9000 --restart=always \
+     -v /var/run/docker.sock:/var/run/docker.sock \
+     -v portainer_data:/data  6053537/portainer-ce
+
+docker volume create portainer_data
+docker run -d --name portainer -p 9000:9000 --restart=always \
+     -v /var/run/docker.sock:/var/run/docker.sock \
+     -v portainer_data:/data  6053537/portainer-ce
+
+
+docker volume create portainer_data1
+docker run -d --name portainer1 -p 9001:9000 --restart=always \
+     -v /var/run/docker.sock:/var/run/docker.sock \
+     -v portainer_data1:/data  6053537/portainer-ce
+
+docker volume create portainer_data
+docker run -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data --name portainer portainer/portainer
+
+
+从主机复制到容器 sudo docker cp host_path containerID:container_path
+从容器复制到主机 sudo docker cp containerID:container_path host_path

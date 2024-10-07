@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>Parse_Dn_vue</title>
+    <script>
+        const vuePath = 'hiker://files/rules/dzHouse/js/vue.js';
+        if(typeof(fba)=='undefined'||!fba){
+            var fba = fy_bridge_app;
+        }
+        try {
+            if(typeof(request)=='undefined'||!request){
+                eval(fba.getInternalJs());
+            }
+            // fba.log(vuePath);
+            if(!request(vuePath)){
+                fba.writeFile(vuePath,request('http://hiker.nokia.press/hikerule/rulelist.json?id=1823'));
+            }
+            try {
+                eval(fba.fetch(vuePath));
+            }catch (e) {
+                // console.log(e.message);
+                fba.log(e.message);
+            }
+            // fba.log('加载vue组件完毕');
+        }catch (e) {
+            alert(e.message);
+        }
+    </script>
+    <!--    <script src="https://unpkg.com/vue@next"></script>-->
+    <!--    <script src="file:///storage/emulated/0/Android/data/com.example.hikerview/files/Documents/rules/dzHouse/js/vue.js"></script>-->
+    <style>
+        body {
+            margin: 0 5px 0 5px;
+            padding: 0 0px 0 0px;
+            /*            background: #F9F0DA;*/
+            font-weight: 0;
+            font-family: "Microsoft YaHei","宋体","Segoe UI", "Lucida Grande", Helvetica, Arial,sans-serif, FreeSans, Arimo;
+        }
+        #app{
+            margin-top:-10px;
+        }
+        #tips{
+            margin-top:-10px;
+            margin-bottom:5px;
+        }
+        .fung{
+            text-align:center
+        }
+        div.box {
+            margin-top:-1px;
+            height: 43px;
+            line-height: 20px;
+        }
+        /*输入框尺寸*/
+        form {
+            background: transparent;
+            position: relative;
+            width: 100%;
+        }
+
+        input, label, select {
+            border: none;
+            outline: none;
+        }
+        /*字体位置*/
+        input {
+            width: 77%;
+            height: 32px;
+            padding-left: 66px;
+            padding-right: 0px;
+        }
+
+        label {
+            text-align:center;
+            line-height: 43px;
+            height: 40px;
+            width: 60px;
+            cursor: pointer;
+            position: absolute;
+        }
+
+        /*小框*/
+        .bar label {
+            /*background: #D06B6C;*/
+            border-radius: 5px 555px 555px 5px;
+            width: 60px;
+            font-size: 13px;
+            top: 0;
+            left: 3px;
+        }
+
+        /*输入框样式*/
+        .bar input {
+            /*border-radius: 5px 555px 555px 5px;
+             */
+            border-radius: 4px;
+        }
+
+        /*列表*/
+        select {
+            text-align:center;
+            line-height:40px;
+            height: 40px;
+            width: 20px;
+            cursor: pointer;
+            position: absolute;
+        }
+
+        /*列表*/
+        .lieb select{
+            /*border-radius: 4px;*/
+            border-radius: 555px 5px 5px 555px;
+            width: 80px;
+            text-align:center;
+            font-size: 13px;
+            top: 0;
+            right: 2px;
+        }
+
+        /*头像*/
+        .round_icon{
+            width: 40px;
+            height: 40px;
+            display: flex;
+            border-radius: 50%;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+<div class="fung">
+    <a style="float:left;">
+        <button  :style="'border: none;border-radius:10px;background: '+themes.closeBtn.background+';width: 80px; font-size: 18px;color: '+themes.closeBtn.color" onclick="cancel();">关 闭</button>
+    </a>
+    <a class="btn btn-primary">
+        <!--        <button  :style="'border: none;border-radius:10px;background: '+themes.tipsBtn.background+';width: 120px; font-size: 18px;color: '+themes.tipsBtn.color" @click="showTips=!showTips">{{showTips?"隐藏提示":"显示提示"}}</button>-->
+        <button  :style="'border: none;border-radius:10px;background: '+themes.tipsBtn.background+';width: 120px; font-size: 18px;color: '+themes.tipsBtn.color" @click="showTips=!showTips" v-text="showTips?'隐藏提示':'显示提示'"></button>
+    </a>
+    <a style="float:right">
+        <button :style="'border: none;border-radius:10px;background: '+themes.saveBtn.background+';width: 80px; font-size: 18px;color: '+themes.saveBtn.color" onclick="clickme('配 置 已 保 存 ！', 1000, '开');">保 存</button>
+    </a>
+
+</div>
+<br>
+<div id="app">
+    <h6 id="tips" v-html="tips" v-show="showTips"></h6>
+    <div class="box bar" v-for="option in options">
+        <form>
+            <!--            <label type="submit" :style="'background:'+themes.barlabel.background+';color:'+themes.barlabel.color">{{ option.name }}</label>-->
+            <label type="submit" :style="'background:'+themes.barlabel.background+';color:'+themes.barlabel.color" v-text="option.name"></label>
+            <input :style="'background:'+themes.barInput.background+';border: 3px solid '+themes.barInput.color" type="text" onclick="resetSelect(this.id)" :placeholder="option.placeholder||placeholder" v-model="option.value" v-bind:id="option.id">
+            <div class="lieb">
+                <select :style="'background:'+themes.select.background+';color:'+themes.select.color" :clearable="true" size="2" :id="option.id+'Select'" :name="option.id" onchange="getOption(this.id,this.name)"  v-model="option.value">
+                    <!--                    <option v-if="option.id!=='qju'&&option.id!=='cj'" :value="sel" :key="index" v-for="(sel,index) in mySelect">{{ sel }}</option>-->
+                    <option v-if="option.id!=='qju'&&option.id!=='cj'" :value="sel" :key="index" v-for="(sel,index) in mySelect" v-text="sel"></option>
+                    <!--                    <option v-else-if="option.id==='qju'" :value="sel" :key="index" v-for="(sel,index) in ['默认'].concat(mySelect)">{{ sel }}</option>-->
+                    <option v-else-if="option.id==='qju'" :value="sel" :key="index" v-for="(sel,index) in ['默认'].concat(mySelect)" v-text="sel"></option>
+                    <!--                    <option :value="sel" :key="index" v-else v-for="(sel,index) in cjSel">{{ sel }}</option>-->
+                    <option :value="sel" :key="index" v-else v-for="(sel,index) in cjSel" v-text="sel"></option>
+                </select>
+            </div>
+        </form>
+    </div>
+</div>
+<div>
+    <a v-for="ver in verinfo" style="float:left;margin-top:1px;margin-right: 20px" v-bind:id='ver.id' onclick="doOption(this.id)">
+        <img :src="ver.avatar" class="round_icon"  alt="">
+        <!--        <span style="margin-left:10px;line-height:10px;font-size:12px;color: grey;">{{ ver.author }}</span>-->
+        <span style="margin-left:10px;line-height:10px;font-size:12px;color: grey;" v-text="ver.author"></span>
+    </a>
+    <a style="float:right;margin-top:10px;">
+        <button :style="'border: none;border-radius:10px;background:'+themes.saveCloseBtn.background+';width: 160px;height:40px; font-size: 18px;color: '+themes.saveCloseBtn.color" onclick="clickme('配 置 已 保 存 ！', 1000, '关');">保存并关闭界面</button>
+    </a>
+</div>
+<script>
+    let tips = `提示：<br>①注意插件选项，没有手动导入插件的话不用动它。如设置不当会导致规则无法使用，<br>解决办法：视界打开更多设置→文件管理→点cache→长按MyParseSet.json删除掉；<br>②全局设置如果选择了非默认那么全部的解析会使用这一设置，不想这样的话请填入默认；<br>③绿色保存按钮仅仅保存配置不会关闭设置页面，配置后想保存并关闭设置页面的话请点蓝色按钮；<br>④如果遇到保存按钮点不动或者报错的情况，以下路径挨着删除一遍，然后重新拉取插件，网页再打开此网页[不要先拉代码]。记得备份<br>
+主插件存放路径: /cache/Parse_Dn.js<br>
+网页脚本存放路径: /cache/Parse_Dn.html<br>
+旧断插配置路径:/cache/MyParseSet.json<br>
+新断插配置路径/rules/DuanNian/MyParse.json<br>
+主题文件:/cache/MyTheme.json<br>
+主题文件:/cache/MyTheme.json<br>
+自动档解析:/cache/MyJiexi.json<br>
+    ⑤阅读完提示点关闭加载完整设置页面，如出问题无法自行解决点图片进入论坛向我反馈。<br>`;
+    let placeholder='输入解析名或者URL......';
+    //#aa96da #fc5185
+    let themes = {
+        name:'默认主题',
+        closeBtn:{color:'#f6f6f6',background:'#aa96da'},
+        saveBtn:{color:'#F9F0DA',background:'#068006'},
+        saveCloseBtn:{color:'#F9F0DA',background:'#05BFC5'},
+        tipsBtn:{color:'#F9F0DA',background:'#05BFC5'},
+        barlabel:{color:'#F9F0DA',background:'#aa96da'},
+        barInput:{color:'#aa96da',background:'#ffffd2'},
+        select:{color:'#F9F0DA',background:'#aa96da'},
+    };
+    let themeDef = {"name":"断念原皮","closeBtn":{"color":"#F9F0DA","background":"#c5464a"},"saveBtn":{"color":"#F9F0DA","background":"#068006"},"saveCloseBtn":{"color":"#F9F0DA","background":"#05BFC5"},"tipsBtn":{"color":"#F9F0DA","background":"#05BFC5"},"barlabel":{"color":"#F9F0DA","background":"#D06B6C"},"barInput":{"color":"#D06B6C","background":"#F9F0DA"},"select":{"color":"#F9F0DA","background":"#D06B6C"}};
+    var themeRoute = "hiker://files/cache/MyTheme.json";
+    if(!fba.fetch(themeRoute)){
+        fba.writeFile(themeRoute,JSON.stringify({now_theme:'默认主题',themes:[themes,themeDef]}))
+    }
+    try {
+        let myThemes = JSON.parse(fba.fetch(themeRoute));
+        let nowTheme = myThemes.themes.filter(it=>it.name === myThemes.now_theme);
+        themes = nowTheme?nowTheme[0]:myThemes.themes[0];
+    }catch (e) {}
+
+    // 断念初始化部分
+    const allApi=['https://test.rongxingvr.com/test/?url=','http://cache.languang.icu:88/didi.php?url='];
+    var settings = {
+        qy: '万能解析Ⓙ',
+        yk: '万能解析Ⓙ',
+        tx: '万能解析Ⓙ',
+        mg: '万能解析Ⓙ',
+        bl: '万能解析Ⓙ',
+        sh: '万能解析Ⓙ',
+        xg: '万能解析Ⓙ',
+        // al: '万能解析Ⓙ',
+        pp: '万能解析Ⓙ',
+        mi: '万能解析Ⓙ',
+        le: '万能解析Ⓙ',
+        lt: '万能解析Ⓙ',//龙腾
+        rr:'万能解析Ⓙ',//人人迷
+        wd:'万能解析Ⓙ',//五毒云
+        oth: '道长仓库通免',
+        one: '1080',
+        fun: '融兴',
+        qju: '默认',
+        cj: 'hiker://files/cache/Parse_Dn.js'
+    };
+    var oldRoute = "hiker://files/cache/MyParseSet.json";
+    var mySet = fba.fetch(oldRoute);
+    var newRoute = "hiker://files/rules/DuanNian/MyParse.json";
+    if(!fba.fetch(newRoute)){
+        fba.writeFile(newRoute,JSON.stringify({settings:settings,title:["yun1717","你爹科技","融兴","人人迷-优酷"],codes:{"你爹科技":"http://cache.languang.icu:88/didi.php?url=","融兴":"https://test.rongxingvr.com/test/?url=","人人迷-优酷":"https://svip.renrenmi.cc:2222/api/?key=nn4j8rukPXSVzR78E9&url="}}))
+    }
+    var newConfig = fba.fetch(newRoute);
+    var mySelect = [];
+    function compare(list) {
+        return function (it) {
+            return !list.includes(it)
+        }
+    }
+    if(newConfig&&newConfig.length>20){
+        eval("newConfig =" + newConfig + ";");
+        let newKeys = Object.keys(newConfig.settings);
+        let nowKeys = Object.keys(settings);
+        for(let i in newKeys){//清除多余的节点
+            if(!nowKeys.includes(newKeys[i])){
+                delete newConfig.settings[newKeys[i]]
+            }
+        }
+        settings = Object.assign(settings,newConfig.settings);
+        var ycTitle = ['defaultParse', 'defaultParseWeb','maoss', 'CityIP', 'cacheM3u8', 'pcUA', 'parseLc', 'gparse', 'nparse'];
+        mySelect = newConfig.title.filter(compare(ycTitle));
+        // mySelect = mySelect.map((it)=>{
+        //     let flag = 'Ⓤ';
+        //     if(typeof(newConfig.codes[it])==='function'){
+        //         flag = 'Ⓙ';
+        //     }else if(typeof(newConfig.codes[it])==='undefined'){
+        //         flag = '';
+        //     }
+        //     return flag+it
+        // });
+    }
+    //fba.log(JSON.stringify(mySelect));
+
+    let options = [
+        {
+            name:'爱奇艺',
+            id:'qy',
+            value:settings.qy,
+            placeholder:'设置爱奇艺'
+        },
+        {
+            name:'优酷',
+            id:'yk',
+            value:settings.yk
+        },
+        {
+            name:'腾讯',
+            id:'tx',
+            value:settings.tx
+        },
+        {
+            name:'芒果',
+            id:'mg',
+            value:settings.mg
+        },
+        {
+            name:'哔哩哔哩',
+            id:'bl',
+            value:settings.bl
+        },
+        {
+            name:'搜狐',
+            id:'sh',
+            value:settings.sh
+        },
+        {
+            name:'西瓜',
+            id:'xg',
+            value:settings.xg
+        },
+        {
+            name:'PPTV',
+            id:'pp',
+            value:settings.pp
+        },
+        {
+            name:'咪咕',
+            id:'mi',
+            value:settings.mi
+        },
+        {
+            name:'乐视',
+            id:'le',
+            value:settings.le
+        },
+        {
+            name:'1905',
+            id:'one',
+            value:settings.one
+        },
+        {
+            name:'风行',
+            id:'fun',
+            value:settings.fun
+        },
+        {
+            name:'龙腾',
+            id:'lt',
+            value:settings.lt
+        },
+        {
+            name:'人人迷',
+            id:'rr',
+            value:settings.rr
+        },
+        {
+            name:'五毒',
+            id:'wd',
+            value:settings.wd
+        },
+        {
+            name:'其他',
+            id:'oth',
+            value:settings.oth
+        },
+        {
+            name:'全局',
+            id:'qju',
+            value:settings.qju
+        },
+        {
+            name:'插件',
+            id:'cj',
+            value:settings.cj
+        },
+    ];
+
+    function Did(id){
+        return document.getElementById(id);
+    }
+    function getOption(id,title) {
+        var obj = Did(id);
+        Did(title).value = obj.options[obj.selectedIndex].text;
+        // Did(title).value = obj.options[obj.selectedIndex].text.replace(/Ⓤ|Ⓙ/g,'');
+    }
+    function resetSelect(id){
+        Did(id+"Select").options.selectedIndex = -1;
+    }
+
+    //函数部分
+
+    function Toast(msg,duration){
+        duration=isNaN(duration)?2000:duration;
+        var m = document.createElement('div');
+        m.innerHTML = msg;
+        m.style.cssText="width:45%; min-width:150px; background:#311; opacity:0.6; height:auto;min-height: 45px; color:#fff; line-height:45px; text-align:center; border-radius:10px; position:fixed; top:60%; left:26%; z-index:999999;";
+        document.body.appendChild(m);
+        setTimeout(function() {
+            var d = 0.5;
+            m.style.webkitTransition = '-webkit-transform ' + d + 's ease-in, opacity ' + d + 's ease-in';
+            m.style.opacity = '0';
+            setTimeout(function() { document.body.removeChild(m) }, d * 1000);
+        }, duration);
+    }
+
+    function openDnPage(){
+        fba.open(JSON.stringify({
+            rule: "=^_^=",
+            title: "编辑解析",
+            url: "hiker://page/Route?rule=MyFieldᴰⁿ&type=编辑#noHistory##noRecordHistory#",
+            group: "",
+            col_type: "",
+            //findRule: "js:this.d=[];$.require(\"hiker://page/Parse_Dn.js?rule=MyFieldᴰⁿ\").edit();setResult(d);",
+            preRule: "",
+            extra: {}
+        }));
+    }
+    function openTheme(){
+        fba.open(JSON.stringify({
+            rule: "=^_^=",
+            title: "主题管理",
+            url: "hiker://page/Route?rule=MyFieldᴰⁿ&type=主题#noHistory##noRecordHistory#",
+            group: "",
+            col_type: "",
+            preRule: "",
+            extra: {}
+        }));
+    }
+    function openJxManage(){
+        fba.open(JSON.stringify({
+            rule: "=^_^=",
+            title: "解析配置管理",
+            url: "hiker://page/Route?rule=MyFieldᴰⁿ&type=解析#noHistory##noRecordHistory#",
+            group: "",
+            col_type: "",
+            preRule: "",
+            extra: {}
+        }));
+    }
+    function cancel(){
+        if(!mySet){
+            fba.writeFile(oldRoute, JSON.stringify(settings, null, 4));
+            fba.refreshPage(true);
+        }else{
+            fba.back(false);
+        }
+    }
+    function clickme(msg,duration,title){
+        try{
+            for(let key in settings){
+                // fba.log(Did(key)+''+key);
+                try{
+                    //settings[key] = Did(key).value.replace(/Ⓤ|Ⓙ/g,'');
+                    settings[key] = Did(key).value;
+                }catch(e){
+                    alert("未获取到节点:"+key+"\n"+e.message);
+                }
+
+            }
+            if(mySelect){
+                Object.assign(newConfig.settings, settings);
+                fba.writeFile(newRoute, $$$.stringify(newConfig));
+            }
+            fba.writeFile(oldRoute, $$$.stringify(settings));
+            Toast(msg,duration);
+            if(title==="关"){
+                fba.back();
+            }else{
+                fba.refreshPage(true);
+            }
+        }catch(e){
+            alert(e.message)
+        }
+    }
+
+    //let width=window.screen.availWidth;
+    //let widthPx=width-393+52;
+    //alert("当前分辨率:"+window.screen.availWidth+"*"+window.screen.height);
+    var verinfo = [{
+        id:'dn',
+        author:'断念',
+        avatar:'https://s3.ax1x.com/2021/02/22/y7wb9O.jpg',
+        option:openDnPage,
+    },
+        {
+            id:'dz',
+            author:'道长',
+            avatar:'http://q1.qlogo.cn/g?b=qq&nk=434857005&s=640',
+            option:openTheme
+        },
+        {
+            id:'lm',
+            author: '蓝莓',
+            avatar: 'http://q1.qlogo.cn/g?b=qq&nk=2579949378&s=640',
+            option:openJxManage
+        }
+    ];
+
+    function doOption(option_id){
+        let ver = verinfo.filter(it=>it.id===option_id)[0];
+        ver.option();
+    }
+
+    const RenderHtmlApp = {
+        data() {
+            return {
+                // rawHtml: '<span style="color: red">这里会显示红色！</span>',
+                options:options,
+                verinfo:verinfo,
+                placeholder:placeholder,
+                tips:tips,
+                themes:themes,
+                mySelect:mySelect,
+                // cjSel:['请选择插件 (只作用lazyRule)','hiker://files/cache/Parse_Dn.js','hiker://files/rules/dzHouse/js/srcauto.js','hiker://files/rules/js/Parse-V2_Dn.js'],
+                cjSel:['请选择插件 (只作用lazyRule)','hiker://files/cache/Parse_Dn.js','hiker://files/rules/dzHouse/js/srcauto.js'],
+                settings:settings,
+                showTips:false,
+                //widthPx:widthPx
+            }
+        },
+        methods:{
+            // changeVal:function(event){
+            //     getOption(this.id,this.name);
+            //     this.selOption = event.target.value;
+            //     alert("你选中了"+event.target.value);
+            // }
+            doOption:doOption
+        }
+    }
+    try {
+        const app=Vue.createApp(RenderHtmlApp);
+        app.mount('body');
+    }catch (e) {
+        console.log(e.message)
+    }
+
+</script>
+
+</body>
+</html>
