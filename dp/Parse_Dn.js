@@ -17,7 +17,7 @@ var _mySet = {
     // cj: 'https://code.aliyun.com/AI957/Hiker/raw/master/v/CloudParse-V2_Dn.js',
     cj: 'https://dr.playdreamer.cn/dp/Parse_Dn.js',
     // x5Url: 'https://code.aliyun.com/AI957/Hiker/raw/master/v/Parse_Dn.html',
-    x5Url: 'http://dr.nokia.press/html/Parse_Dn-vue.html',
+    x5Url: 'https://dr.playdreamer.cn/html/Parse_Dn-vue.html',
     parseRoute: 'hiker://files/rules/DuanNian/MyParse.json',
     // x5Route: 'file:///storage/emulated/0/Android/data/com.example.hikerview/files/Documents/cache/Parse_Dn.html'
     x5Route: getPath('hiker://files/cache/Parse_Dn.html'),

@@ -11,6 +11,10 @@ https://gitcode.net/qq_32394351/dr/-/raw/master/
 ```text
 https://dr.playdreamer.cn/
 ```
+
+```text
+https://dr.playdreamer.cn/html/主页时钟天气.html
+```
 ###### 2022.07.28
 由于coding开始做限制，大量直链提示请登录，无法正常访问，因此coding项目全部转移至gitcode  
 项目中所有链接做了统一修改:

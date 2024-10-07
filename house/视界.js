@@ -3,7 +3,7 @@
             let local_html = "hiker://files/rules/dzHouse/html/主页时钟天气.html";
             // const {getApi, api} = $.require("hiker://page/utiliy?rule=道长仓库Pro");
             // let online_html = getApi('importUrl')+"467";
-            let online_html = 'http://dr.nokia.press/html/主页时钟天气.html';
+            let online_html = 'https://dr.playdreamer.cn/html/主页时钟天气.html';
             try {
                 let back = request(online_html, {
                     timeout: 2000
